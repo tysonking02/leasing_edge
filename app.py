@@ -102,6 +102,12 @@ st.sidebar.header('Leasing Edge Tool')
 # with st.sidebar.expander('Find GC IDs'):
 #     property_select = st.selectbox('Select Property', options=sorted(internal_ref['hellodata_property'].unique()))
 
+with st.sidebar.expander('Example GC IDs'):
+    example_ids = [22215630, 18858422]
+    
+    for cid in example_ids:
+        st.markdown(f"- `{cid}`")
+
 funnel_id = st.sidebar.text_input(label='Input GC ID')
 
 submit = st.sidebar.button("Submit")
