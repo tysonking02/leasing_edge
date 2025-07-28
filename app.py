@@ -103,7 +103,7 @@ st.sidebar.header('Leasing Edge Tool')
 #     property_select = st.selectbox('Select Property', options=sorted(internal_ref['hellodata_property'].unique()))
 
 with st.sidebar.expander('Example GC IDs'):
-    example_ids = [22215630, 18858422]
+    example_ids = [22215630, 18858422, 22273015, 21781634, 21610964, 20503383]
     
     for cid in example_ids:
         st.markdown(f"- `{cid}`")
@@ -167,9 +167,10 @@ st.markdown(f"""
     <div style="background-color: #f5f5f5; padding: 20px; border-radius: 6px;">
         <h2>{client_name}</h2>
         {summary_clean}
-        <br>
     </div>
 """, unsafe_allow_html=True)
+
+st.markdown('<br>', unsafe_allow_html=True)
 
 with st.expander('Prospect Info'):
     st.dataframe(merged_prospect)
