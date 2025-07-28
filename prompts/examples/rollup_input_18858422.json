@@ -1,0 +1,331 @@
+{
+  "average_view": [
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Jefferson at the Perimeter Apartments",
+      "gross_price": "$1,301",
+      "sqft": 755,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Roswell Village",
+      "gross_price": "$1,420",
+      "sqft": 817,
+      "available_units": 13
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Randolph Perimeter",
+      "gross_price": "$1,434",
+      "sqft": 725,
+      "available_units": 11
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "2200 Big Creek Apartments",
+      "gross_price": "$1,445",
+      "sqft": 830,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": true,
+      "property": "Cortland Holcomb Bridge",
+      "gross_price": "$1,460",
+      "sqft": 735,
+      "available_units": 5
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Deerfield Village",
+      "gross_price": "$1,478",
+      "sqft": 709,
+      "available_units": 48
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Manchester At Mansell",
+      "gross_price": "$1,552",
+      "sqft": 896,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": true,
+      "property": "Cortland Park 83",
+      "gross_price": "$1,554",
+      "sqft": 838,
+      "available_units": 16
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Walton Centennial",
+      "gross_price": "$1,562",
+      "sqft": 1011,
+      "available_units": 4
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Bell Alpharetta",
+      "gross_price": "$1,591",
+      "sqft": 725,
+      "available_units": 29
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "IMT Deerfield",
+      "gross_price": "$1,641",
+      "sqft": 779,
+      "available_units": 9
+    }
+  ],
+  "minimum_view": [
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Randolph Perimeter",
+      "gross_price": "$1,093",
+      "sqft": 550,
+      "available_units": 11
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Jefferson at the Perimeter Apartments",
+      "gross_price": "$1,280",
+      "sqft": 588,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Deerfield Village",
+      "gross_price": "$1,360",
+      "sqft": 636,
+      "available_units": 48
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Roswell Village",
+      "gross_price": "$1,390",
+      "sqft": 817,
+      "available_units": 13
+    },
+    {
+      "beds": 1,
+      "internal": true,
+      "property": "Cortland Park 83",
+      "gross_price": "$1,395",
+      "sqft": 710,
+      "available_units": 16
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "2200 Big Creek Apartments",
+      "gross_price": "$1,418",
+      "sqft": 760,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": true,
+      "property": "Cortland Holcomb Bridge",
+      "gross_price": "$1,428",
+      "sqft": 735,
+      "available_units": 5
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Manchester At Mansell",
+      "gross_price": "$1,445",
+      "sqft": 857,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Bell Alpharetta",
+      "gross_price": "$1,511",
+      "sqft": 696,
+      "available_units": 29
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "IMT Deerfield",
+      "gross_price": "$1,520",
+      "sqft": 566,
+      "available_units": 9
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Walton Centennial",
+      "gross_price": "$1,539",
+      "sqft": 850,
+      "available_units": 4
+    }
+  ],
+  "maximum_view": [
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Jefferson at the Perimeter Apartments",
+      "gross_price": "$1,347",
+      "sqft": 826,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Roswell Village",
+      "gross_price": "$1,460",
+      "sqft": 817,
+      "available_units": 13
+    },
+    {
+      "beds": 1,
+      "internal": true,
+      "property": "Cortland Holcomb Bridge",
+      "gross_price": "$1,468",
+      "sqft": 735,
+      "available_units": 5
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "2200 Big Creek Apartments",
+      "gross_price": "$1,511",
+      "sqft": 900,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Deerfield Village",
+      "gross_price": "$1,570",
+      "sqft": 851,
+      "available_units": 48
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Walton Centennial",
+      "gross_price": "$1,580",
+      "sqft": 1065,
+      "available_units": 4
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Manchester At Mansell",
+      "gross_price": "$1,690",
+      "sqft": 932,
+      "available_units": 10
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Bell Alpharetta",
+      "gross_price": "$1,691",
+      "sqft": 952,
+      "available_units": 29
+    },
+    {
+      "beds": 1,
+      "internal": true,
+      "property": "Cortland Park 83",
+      "gross_price": "$1,700",
+      "sqft": 860,
+      "available_units": 16
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "IMT Deerfield",
+      "gross_price": "$1,800",
+      "sqft": 1044,
+      "available_units": 9
+    },
+    {
+      "beds": 1,
+      "internal": false,
+      "property": "Randolph Perimeter",
+      "gross_price": "$1,820",
+      "sqft": 975,
+      "available_units": 11
+    }
+  ],
+  "concessions": [
+    {
+      "property": "Cortland Park 83",
+      "concession_text": "Look and lease your apartment home and receive up to one month free!",
+      "from_date": "2025-07-08",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "Deerfield Village",
+      "concession_text": "Receive one month FREE!*\nDon\u2019t miss this hot deal on your new apartment home! Lease within 48 hours of your tour to receive one month FREE when you move in by August 31st, 2025!\u00a0*Terms and conditions may apply. Contact us for full offer details and schedule your personalized tour TODAY!",
+      "from_date": "2025-07-15",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "IMT Deerfield",
+      "concession_text": "LOOK & LEASE: Receive one month free when you apply within 24 hours of your tour.* *Restrictions apply; offer subject to change at any time. Credit will apply to the second full month's statement. Special excludes all property transfers.",
+      "from_date": "2025-07-02",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "Randolph Perimeter",
+      "concession_text": "Now Offering Up To 4 Weeks Free!",
+      "from_date": "2025-04-11",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "Manchester At Mansell",
+      "concession_text": "Special Leasing Opportunity: 1 Month Free!*\nLease now and get 1 month of free rent ! Schedule a tour and take advantage of this limited opportunity! *Restrictions apply and availability is limited. Contact us for details.",
+      "from_date": "2025-07-18",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "Roswell Village",
+      "concession_text": "Receive $1,500 OFF your first full month's rent!\nSign a lease within 24 hours of your tour and move into any of our vacant apartment homes by July 31st, 2025, to receive $1,500 OFF your first full month's rent! *Terms and conditions may apply. Contact us for full offer details and to schedule your personalized TODAY!",
+      "from_date": "2025-06-25",
+      "to_date": "2025-07-22"
+    }
+  ],
+  "prospect": {
+    "client_id": 18858422,
+    "client_email": "barbyt7@gmail.com",
+    "client_full_name": "Barbara Tracey",
+    "client_status": "Prospect",
+    "laundry_preference": NaN,
+    "outdoor_space_preference": NaN,
+    "parking_preference": NaN,
+    "pet_preference": NaN,
+    "notes": "Called about info on the property / Sent quote / will call back to book appointment.",
+    "studio_preference": false,
+    "onebed_preference": true,
+    "twobed_preference": false,
+    "threebed_preference": false,
+    "fourbed_preference": false,
+    "pms_community_id": 2691034,
+    "hellodata_id": "03f4c8be-36fe-5efa-99c0-10be5e75b9b1",
+    "hellodata_property": "Cortland Park 83",
+    "oslPropertyID": 2691034,
+    "ParentAssetName": "Cortland Park 83"
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "average_view": [
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "4123 Cedar Springs",
+      "gross_price": "$1,922",
+      "sqft": 1105,
+      "available_units": 25
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "The Lucas Apartments",
+      "gross_price": "$1,931",
+      "sqft": 1184,
+      "available_units": 6
+    },
+    {
+      "beds": 2,
+      "internal": true,
+      "property": "Cortland Oak Lawn",
+      "gross_price": "$2,235",
+      "sqft": 1037,
+      "available_units": 1
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Axis at Wycliff",
+      "gross_price": "$2,262",
+      "sqft": 1128,
+      "available_units": 11
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "2929 Wycliff",
+      "gross_price": "$2,376",
+      "sqft": 1253,
+      "available_units": 12
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "4110 Fairmount",
+      "gross_price": "$2,376",
+      "sqft": 1130,
+      "available_units": 12
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Seville Uptown",
+      "gross_price": "$2,620",
+      "sqft": 1203,
+      "available_units": 3
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Griffis Oak Lawn",
+      "gross_price": "$2,755",
+      "sqft": 1203,
+      "available_units": 9
+    }
+  ],
+  "minimum_view": [
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "4123 Cedar Springs",
+      "gross_price": "$1,620",
+      "sqft": 927,
+      "available_units": 25
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "The Lucas Apartments",
+      "gross_price": "$1,707",
+      "sqft": 1143,
+      "available_units": 6
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "2929 Wycliff",
+      "gross_price": "$1,960",
+      "sqft": 1162,
+      "available_units": 12
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Axis at Wycliff",
+      "gross_price": "$2,060",
+      "sqft": 1035,
+      "available_units": 11
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "4110 Fairmount",
+      "gross_price": "$2,144",
+      "sqft": 1099,
+      "available_units": 12
+    },
+    {
+      "beds": 2,
+      "internal": true,
+      "property": "Cortland Oak Lawn",
+      "gross_price": "$2,235",
+      "sqft": 1037,
+      "available_units": 1
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Seville Uptown",
+      "gross_price": "$2,477",
+      "sqft": 1126,
+      "available_units": 3
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Griffis Oak Lawn",
+      "gross_price": "$2,635",
+      "sqft": 1115,
+      "available_units": 9
+    }
+  ],
+  "maximum_view": [
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "The Lucas Apartments",
+      "gross_price": "$2,051",
+      "sqft": 1298,
+      "available_units": 6
+    },
+    {
+      "beds": 2,
+      "internal": true,
+      "property": "Cortland Oak Lawn",
+      "gross_price": "$2,235",
+      "sqft": 1037,
+      "available_units": 1
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "4123 Cedar Springs",
+      "gross_price": "$2,312",
+      "sqft": 1275,
+      "available_units": 25
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Axis at Wycliff",
+      "gross_price": "$2,545",
+      "sqft": 1259,
+      "available_units": 11
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "2929 Wycliff",
+      "gross_price": "$2,570",
+      "sqft": 1635,
+      "available_units": 12
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Seville Uptown",
+      "gross_price": "$2,780",
+      "sqft": 1280,
+      "available_units": 3
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "4110 Fairmount",
+      "gross_price": "$3,020",
+      "sqft": 1269,
+      "available_units": 12
+    },
+    {
+      "beds": 2,
+      "internal": false,
+      "property": "Griffis Oak Lawn",
+      "gross_price": "$3,055",
+      "sqft": 1417,
+      "available_units": 9
+    }
+  ],
+  "concessions": [
+    {
+      "property": "Seville Uptown",
+      "concession_text": "Up to 4-Weeks Free!",
+      "from_date": "2025-07-14",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "Griffis Oak Lawn",
+      "concession_text": "One month FREE on readily available homes and $1,000 off on preleased homes!",
+      "from_date": "2025-07-18",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "2929 Wycliff",
+      "concession_text": "$500-$1000 off first full month! *Select units. Limited time only!",
+      "from_date": "2025-07-16",
+      "to_date": "2025-07-22"
+    },
+    {
+      "property": "4110 Fairmount",
+      "concession_text": "One Month Free! Call today for more details!*",
+      "from_date": "2025-05-16",
+      "to_date": "2025-07-22"
+    }
+  ],
+  "prospect": {
+    "client_id": 22215630,
+    "client_email": "kalsekarsamruddhi8@gmail.com",
+    "client_full_name": "Samruddhi Kalsekar",
+    "client_status": "Prospect",
+    "laundry_preference": "Laundry in Unit",
+    "outdoor_space_preference": NaN,
+    "parking_preference": "Any",
+    "pet_preference": NaN,
+    "notes": "-moving with room mate\n-somewhat familiar with the area, has friends who lives in the area\n-fitness center\n-no first floor\n-covered criteria\n-no special to show\n\n",
+    "studio_preference": false,
+    "onebed_preference": false,
+    "twobed_preference": true,
+    "threebed_preference": false,
+    "fourbed_preference": false,
+    "pms_community_id": 4559245,
+    "hellodata_id": "b4d49cf0-609d-5462-9c6a-70d63779b8d1",
+    "hellodata_property": "Cortland Oak Lawn",
+    "oslPropertyID": 4559245,
+    "ParentAssetName": "Cortland Oak Lawn"
+  }
+}

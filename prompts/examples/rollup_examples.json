@@ -1,0 +1,1222 @@
+[
+  {
+    "input": {
+      "average_view": [
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Station Heights",
+          "gross_price": "$1,528",
+          "sqft": 1089,
+          "available_units": 18
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "2200 Big Creek Apartments",
+          "gross_price": "$1,652",
+          "sqft": 1100,
+          "available_units": 14
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Roswell Village",
+          "gross_price": "$1,661",
+          "sqft": 1210,
+          "available_units": 21
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Jefferson at the Perimeter Apartments",
+          "gross_price": "$1,688",
+          "sqft": 1206,
+          "available_units": 15
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Cortland Holcomb Bridge",
+          "gross_price": "$1,699",
+          "sqft": 1033,
+          "available_units": 15
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Manchester At Mansell",
+          "gross_price": "$1,790",
+          "sqft": 1243,
+          "available_units": 18
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Deerfield Village",
+          "gross_price": "$1,841",
+          "sqft": 1131,
+          "available_units": 19
+        },
+        {
+          "beds": 2,
+          "internal": true,
+          "property": "Cortland Park 83",
+          "gross_price": "$1,850",
+          "sqft": 1148,
+          "available_units": 25
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Randolph Perimeter",
+          "gross_price": "$1,883",
+          "sqft": 1183,
+          "available_units": 10
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "IMT Deerfield",
+          "gross_price": "$1,929",
+          "sqft": 1227,
+          "available_units": 11
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Walton Centennial",
+          "gross_price": "$1,961",
+          "sqft": 1263,
+          "available_units": 7
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Bell Alpharetta",
+          "gross_price": "$2,190",
+          "sqft": 1151,
+          "available_units": 32
+        }
+      ],
+      "minimum_view": [
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Roswell Village",
+          "gross_price": "$1,450",
+          "sqft": 1147,
+          "available_units": 21
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Station Heights",
+          "gross_price": "$1,455",
+          "sqft": 960,
+          "available_units": 18
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Randolph Perimeter",
+          "gross_price": "$1,576",
+          "sqft": 980,
+          "available_units": 10
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Manchester At Mansell",
+          "gross_price": "$1,595",
+          "sqft": 1150,
+          "available_units": 18
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "2200 Big Creek Apartments",
+          "gross_price": "$1,606",
+          "sqft": 950,
+          "available_units": 14
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Jefferson at the Perimeter Apartments",
+          "gross_price": "$1,616",
+          "sqft": 1206,
+          "available_units": 15
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Cortland Holcomb Bridge",
+          "gross_price": "$1,639",
+          "sqft": 1000,
+          "available_units": 15
+        },
+        {
+          "beds": 2,
+          "internal": true,
+          "property": "Cortland Park 83",
+          "gross_price": "$1,675",
+          "sqft": 1127,
+          "available_units": 25
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Deerfield Village",
+          "gross_price": "$1,740",
+          "sqft": 1016,
+          "available_units": 19
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "IMT Deerfield",
+          "gross_price": "$1,850",
+          "sqft": 1214,
+          "available_units": 11
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Walton Centennial",
+          "gross_price": "$1,900",
+          "sqft": 1200,
+          "available_units": 7
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Bell Alpharetta",
+          "gross_price": "$2,010",
+          "sqft": 1140,
+          "available_units": 32
+        }
+      ],
+      "prospect": {
+        "client_id": 12646246,
+        "client_email": "philpacs@gmail.com",
+        "client_full_name": "Philip Chase",
+        "client_status": "Prospect",
+        "laundry_preference": NaN,
+        "outdoor_space_preference": NaN,
+        "parking_preference": NaN,
+        "pet_preference": NaN,
+        "notes": "Moving from Florida to Georgia. Renting out their home. Looking for a two-bedroom unit for a short-term stay. Really likes the Willow floor plan. Looking to move in January.",
+        "studio_preference": false,
+        "onebed_preference": false,
+        "twobed_preference": true,
+        "threebed_preference": false,
+        "fourbed_preference": false,
+        "pms_community_id": 2691034,
+        "hellodata_id": "03f4c8be-36fe-5efa-99c0-10be5e75b9b1",
+        "hellodata_property": "Cortland Park 83",
+        "oslPropertyID": 2691034,
+        "ParentAssetName": "Cortland Park 83"
+      }
+    },
+    "output": "##### Philip Chase Comp Summary:\n\n**2 Bedrooms:**\n- We are towards the **middle** of our comps in terms of average price and square footage. \n- There are two comp properties with gross price under **$1500 a month**.\n- Station Heights, Randolph Perimeter, and 2200 Big Creek Apartments are all cheaper but are **under 1000 sqft**, whereas our cheapest 2B is **1127 sqft**.\n- We have a lot of availability for 2 beds, **25 available units**\n\n**Prospect Info:**\n- Philip is moving from Florida to Georgia\n- He's looking for a short-term stay\n- **Interested in the Willow floorplan**\n- Looking to move in January"
+  },
+  {
+    "input": {
+      "average_view": [
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Veridian At Sandy Springs",
+          "gross_price": "$1,167",
+          "sqft": 725,
+          "available_units": 16
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "ARIUM Morgan Falls",
+          "gross_price": "$1,174",
+          "sqft": 739,
+          "available_units": 27
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "The Atlantic North Springs",
+          "gross_price": "$1,193",
+          "sqft": 718,
+          "available_units": 8
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Dunwoody Pointe",
+          "gross_price": "$1,199",
+          "sqft": 729,
+          "available_units": 7
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Dunwoody Crossing",
+          "gross_price": "$1,216",
+          "sqft": 747,
+          "available_units": 14
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "The Addison at Sandy Springs",
+          "gross_price": "$1,268",
+          "sqft": 752,
+          "available_units": 3
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Morgans Landing",
+          "gross_price": "$1,358",
+          "sqft": 915,
+          "available_units": 4
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Spalding Bridge",
+          "gross_price": "$1,385",
+          "sqft": 933,
+          "available_units": 11
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Glen Lake",
+          "gross_price": "$1,430",
+          "sqft": 785,
+          "available_units": 5
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Marquis at Perimeter Center",
+          "gross_price": "$1,446",
+          "sqft": 1000,
+          "available_units": 5
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Wesley St. James Apartments At Sandy Springs",
+          "gross_price": "$1,448",
+          "sqft": 824,
+          "available_units": 43
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Dunwoody Ridge",
+          "gross_price": "$1,521",
+          "sqft": 697,
+          "available_units": 31
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "The Atlantic North Springs",
+          "gross_price": "$1,230",
+          "sqft": 979,
+          "available_units": 6
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Dunwoody Pointe",
+          "gross_price": "$1,294",
+          "sqft": 1007,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Veridian At Sandy Springs",
+          "gross_price": "$1,489",
+          "sqft": 1089,
+          "available_units": 7
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Dunwoody Crossing",
+          "gross_price": "$1,512",
+          "sqft": 1177,
+          "available_units": 9
+        },
+        {
+          "beds": 2,
+          "internal": true,
+          "property": "The Addison at Sandy Springs",
+          "gross_price": "$1,516",
+          "sqft": 1158,
+          "available_units": 9
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "ARIUM Morgan Falls",
+          "gross_price": "$1,520",
+          "sqft": 1087,
+          "available_units": 25
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Marquis at Perimeter Center",
+          "gross_price": "$1,626",
+          "sqft": 1200,
+          "available_units": 6
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Morgans Landing",
+          "gross_price": "$1,717",
+          "sqft": 1282,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Glen Lake",
+          "gross_price": "$1,754",
+          "sqft": 1256,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Spalding Bridge",
+          "gross_price": "$1,788",
+          "sqft": 1222,
+          "available_units": 8
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Dunwoody Ridge",
+          "gross_price": "$1,818",
+          "sqft": 1100,
+          "available_units": 3
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Wesley St. James Apartments At Sandy Springs",
+          "gross_price": "$1,962",
+          "sqft": 1224,
+          "available_units": 4
+        }
+      ],
+      "minimum_view": [
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "The Atlantic North Springs",
+          "gross_price": "$1,048",
+          "sqft": 718,
+          "available_units": 8
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Dunwoody Pointe",
+          "gross_price": "$1,109",
+          "sqft": 729,
+          "available_units": 7
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Dunwoody Crossing",
+          "gross_price": "$1,125",
+          "sqft": 544,
+          "available_units": 14
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Veridian At Sandy Springs",
+          "gross_price": "$1,130",
+          "sqft": 650,
+          "available_units": 16
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "The Addison at Sandy Springs",
+          "gross_price": "$1,241",
+          "sqft": 748,
+          "available_units": 3
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Wesley St. James Apartments At Sandy Springs",
+          "gross_price": "$1,252",
+          "sqft": 715,
+          "available_units": 43
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Spalding Bridge",
+          "gross_price": "$1,299",
+          "sqft": 933,
+          "available_units": 11
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Morgans Landing",
+          "gross_price": "$1,335",
+          "sqft": 895,
+          "available_units": 4
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Dunwoody Ridge",
+          "gross_price": "$1,350",
+          "sqft": 600,
+          "available_units": 31
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Glen Lake",
+          "gross_price": "$1,361",
+          "sqft": 621,
+          "available_units": 5
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Marquis at Perimeter Center",
+          "gross_price": "$1,425",
+          "sqft": 1000,
+          "available_units": 5
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "ARIUM Morgan Falls",
+          "gross_price": "$896",
+          "sqft": 614,
+          "available_units": 27
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "The Atlantic North Springs",
+          "gross_price": "$1,121",
+          "sqft": 839,
+          "available_units": 6
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "ARIUM Morgan Falls",
+          "gross_price": "$1,167",
+          "sqft": 917,
+          "available_units": 25
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Dunwoody Pointe",
+          "gross_price": "$1,187",
+          "sqft": 873,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Veridian At Sandy Springs",
+          "gross_price": "$1,385",
+          "sqft": 1050,
+          "available_units": 7
+        },
+        {
+          "beds": 2,
+          "internal": true,
+          "property": "The Addison at Sandy Springs",
+          "gross_price": "$1,463",
+          "sqft": 1122,
+          "available_units": 9
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Dunwoody Crossing",
+          "gross_price": "$1,485",
+          "sqft": 1121,
+          "available_units": 9
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Morgans Landing",
+          "gross_price": "$1,525",
+          "sqft": 1090,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Marquis at Perimeter Center",
+          "gross_price": "$1,575",
+          "sqft": 1200,
+          "available_units": 6
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Glen Lake",
+          "gross_price": "$1,626",
+          "sqft": 1191,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Spalding Bridge",
+          "gross_price": "$1,715",
+          "sqft": 1222,
+          "available_units": 8
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Dunwoody Ridge",
+          "gross_price": "$1,755",
+          "sqft": 1100,
+          "available_units": 3
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Wesley St. James Apartments At Sandy Springs",
+          "gross_price": "$1,952",
+          "sqft": 1224,
+          "available_units": 4
+        }
+      ],
+      "prospect": {
+        "client_id": 10324937,
+        "client_email": "pud5082@yahoo.com",
+        "client_full_name": "Paul Pudney",
+        "client_status": "Prospect",
+        "laundry_preference": "Laundry in Unit",
+        "outdoor_space_preference": "Private",
+        "parking_preference": NaN,
+        "pet_preference": "Large Dogs",
+        "notes": "interested in seeing #1304\nand #0212\npossible 2x1 or 1x1\ncalling for friend\nhe works at maggianos and is a dance teacher\nhas senior dog",
+        "studio_preference": false,
+        "onebed_preference": true,
+        "twobed_preference": true,
+        "threebed_preference": false,
+        "fourbed_preference": false,
+        "pms_community_id": 4971398,
+        "hellodata_id": "00fde857-a768-59db-99bf-22326284f87a",
+        "hellodata_property": "The Addison at Sandy Springs",
+        "oslPropertyID": 4971398,
+        "ParentAssetName": "The Addison at Sandy Springs"
+      }
+    },
+    "output": "##### Paul Pudney Comp Summary:\n\n**1 Bedroom:**\n- We are towards the **middle** of our comps in terms of average price and square footage. \n- There are four comp properties with gross price under **$1200 a month**.\n- All of the properties that have cheaper 1 beds than us have smaller units\n- We have very little inventory, **only 3 available 1B units**\n\n**2 Bedrooms:**\n- The Atlantic North Springs and Dunwoody Pointe are *significantly* cheaper than every other comp, both have averages under **$1300 a month**\n- We have an available unit at **$1463** with 1122 sqft. This is very competitive in the market. 6 of our comps don't have any units available under **$1500 a month**\n- We have **9 available units** in 2 beds\n\n**Prospect Info:**\n- Interested in seeing #1304 and #0212\n- Only needs 1 bath\n- Has an old large dog\n- Prefers in unit laundry and private outdoor space"
+  },
+  {
+    "input": {
+      "average_view": [
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Jefferson at the Perimeter Apartments",
+          "gross_price": "$1,301",
+          "sqft": 755,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Roswell Village",
+          "gross_price": "$1,420",
+          "sqft": 817,
+          "available_units": 13
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Randolph Perimeter",
+          "gross_price": "$1,434",
+          "sqft": 725,
+          "available_units": 11
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "2200 Big Creek Apartments",
+          "gross_price": "$1,445",
+          "sqft": 830,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "Cortland Holcomb Bridge",
+          "gross_price": "$1,460",
+          "sqft": 735,
+          "available_units": 5
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Deerfield Village",
+          "gross_price": "$1,478",
+          "sqft": 709,
+          "available_units": 48
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Manchester At Mansell",
+          "gross_price": "$1,552",
+          "sqft": 896,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "Cortland Park 83",
+          "gross_price": "$1,554",
+          "sqft": 838,
+          "available_units": 16
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Walton Centennial",
+          "gross_price": "$1,562",
+          "sqft": 1011,
+          "available_units": 4
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Bell Alpharetta",
+          "gross_price": "$1,591",
+          "sqft": 725,
+          "available_units": 29
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "IMT Deerfield",
+          "gross_price": "$1,641",
+          "sqft": 779,
+          "available_units": 9
+        }
+      ],
+      "minimum_view": [
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Randolph Perimeter",
+          "gross_price": "$1,093",
+          "sqft": 550,
+          "available_units": 11
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Jefferson at the Perimeter Apartments",
+          "gross_price": "$1,280",
+          "sqft": 588,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Deerfield Village",
+          "gross_price": "$1,360",
+          "sqft": 636,
+          "available_units": 48
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Roswell Village",
+          "gross_price": "$1,390",
+          "sqft": 817,
+          "available_units": 13
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "Cortland Park 83",
+          "gross_price": "$1,395",
+          "sqft": 710,
+          "available_units": 16
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "2200 Big Creek Apartments",
+          "gross_price": "$1,418",
+          "sqft": 760,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "Cortland Holcomb Bridge",
+          "gross_price": "$1,428",
+          "sqft": 735,
+          "available_units": 5
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Manchester At Mansell",
+          "gross_price": "$1,445",
+          "sqft": 857,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Bell Alpharetta",
+          "gross_price": "$1,511",
+          "sqft": 696,
+          "available_units": 29
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "IMT Deerfield",
+          "gross_price": "$1,520",
+          "sqft": 566,
+          "available_units": 9
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Walton Centennial",
+          "gross_price": "$1,539",
+          "sqft": 850,
+          "available_units": 4
+        }
+      ],
+      "maximum_view": [
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Jefferson at the Perimeter Apartments",
+          "gross_price": "$1,347",
+          "sqft": 826,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Roswell Village",
+          "gross_price": "$1,460",
+          "sqft": 817,
+          "available_units": 13
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "Cortland Holcomb Bridge",
+          "gross_price": "$1,468",
+          "sqft": 735,
+          "available_units": 5
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "2200 Big Creek Apartments",
+          "gross_price": "$1,511",
+          "sqft": 900,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Deerfield Village",
+          "gross_price": "$1,570",
+          "sqft": 851,
+          "available_units": 48
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Walton Centennial",
+          "gross_price": "$1,580",
+          "sqft": 1065,
+          "available_units": 4
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Manchester At Mansell",
+          "gross_price": "$1,690",
+          "sqft": 932,
+          "available_units": 10
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Bell Alpharetta",
+          "gross_price": "$1,691",
+          "sqft": 952,
+          "available_units": 29
+        },
+        {
+          "beds": 1,
+          "internal": true,
+          "property": "Cortland Park 83",
+          "gross_price": "$1,700",
+          "sqft": 860,
+          "available_units": 16
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "IMT Deerfield",
+          "gross_price": "$1,800",
+          "sqft": 1044,
+          "available_units": 9
+        },
+        {
+          "beds": 1,
+          "internal": false,
+          "property": "Randolph Perimeter",
+          "gross_price": "$1,820",
+          "sqft": 975,
+          "available_units": 11
+        }
+      ],
+      "concessions": [
+        {
+          "property": "Cortland Park 83",
+          "concession_text": "Look and lease your apartment home and receive up to one month free!",
+          "from_date": "2025-07-08",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "Deerfield Village",
+          "concession_text": "Receive one month FREE!*\nDon\u2019t miss this hot deal on your new apartment home! Lease within 48 hours of your tour to receive one month FREE when you move in by August 31st, 2025!\u00a0*Terms and conditions may apply. Contact us for full offer details and schedule your personalized tour TODAY!",
+          "from_date": "2025-07-15",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "IMT Deerfield",
+          "concession_text": "LOOK & LEASE: Receive one month free when you apply within 24 hours of your tour.* *Restrictions apply; offer subject to change at any time. Credit will apply to the second full month's statement. Special excludes all property transfers.",
+          "from_date": "2025-07-02",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "Randolph Perimeter",
+          "concession_text": "Now Offering Up To 4 Weeks Free!",
+          "from_date": "2025-04-11",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "Manchester At Mansell",
+          "concession_text": "Special Leasing Opportunity: 1 Month Free!*\nLease now and get 1 month of free rent ! Schedule a tour and take advantage of this limited opportunity! *Restrictions apply and availability is limited. Contact us for details.",
+          "from_date": "2025-07-18",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "Roswell Village",
+          "concession_text": "Receive $1,500 OFF your first full month's rent!\nSign a lease within 24 hours of your tour and move into any of our vacant apartment homes by July 31st, 2025, to receive $1,500 OFF your first full month's rent! *Terms and conditions may apply. Contact us for full offer details and to schedule your personalized TODAY!",
+          "from_date": "2025-06-25",
+          "to_date": "2025-07-22"
+        }
+      ],
+      "prospect": {
+        "client_id": 18858422,
+        "client_email": "barbyt7@gmail.com",
+        "client_full_name": "Barbara Tracey",
+        "client_status": "Prospect",
+        "laundry_preference": NaN,
+        "outdoor_space_preference": NaN,
+        "parking_preference": NaN,
+        "pet_preference": NaN,
+        "notes": "Called about info on the property / Sent quote / will call back to book appointment.",
+        "studio_preference": false,
+        "onebed_preference": true,
+        "twobed_preference": false,
+        "threebed_preference": false,
+        "fourbed_preference": false,
+        "pms_community_id": 2691034,
+        "hellodata_id": "03f4c8be-36fe-5efa-99c0-10be5e75b9b1",
+        "hellodata_property": "Cortland Park 83",
+        "oslPropertyID": 2691034,
+        "ParentAssetName": "Cortland Park 83"
+      }
+    },
+    "output": "### 1-Bedroom Overview for Barbara Tracey  \nBarbara reached out requesting information and has received a quote. She's planning to call back to book a tour. Based on her interest in **Cortland Park 83**, here\u2019s how our offerings compare to the surrounding market.\n\n#### Internal Property Options\n\n**Cortland Park 83**\n- **Average rent**: **$1,554** for **838 sq ft**\n- **Minimum**: **$1,395** for **710 sq ft**\n- **Maximum**: **$1,700** for **860 sq ft**\n- **16 one-bedroom units currently available**\n- **Current special**: Look and lease your apartment home and receive up to **one month free!**\n- Highlights:\n  - Spacious layouts compared to many nearby properties\n  - Strong availability for flexible move-in timelines\n  - Positioned as a top-tier offering relative to comps in both size and incentives\n\n**Cortland Holcomb Bridge** (also internal)\n- **Average rent**: **$1,460** for **735 sq ft**\n- **Minimum**: **$1,428**\n- **Maximum**: **$1,468**\n- **5 one-bedroom units available**\n- No active concessions at this time\n- Highlights:\n  - Compact and efficient layouts\n  - Ideal for renters prioritizing budget and location\n  - Offers a quieter community with Cortland quality finishes\n\n#### Market Context (External Comparisons)\n- Most nearby 1-bedrooms range from **$1,280\u2013$1,691**, typically offering **700\u2013850 sq ft**\n- Notable deals currently available:\n  - **Roswell Village**: **$1,500 OFF** first full month\u2019s rent\n  - **Randolph Perimeter**: **Up to 4 weeks free**\n  - **Manchester At Mansell**: 1 month free\n- Several properties like **IMT Deerfield**, **2200 Big Creek**, and **Walton Centennial** offer large square footage, but with higher average pricing and fewer consistent incentives\n\n---\n\n### Takeaways\n- **Cortland Park 83** stands out with generous square footage, high availability, and an active leasing special that matches or exceeds competitor offers\n- For a prospect like Barbara seeking clear value and flexibility, Cortland Park 83 is an excellent fit\n- **Cortland Holcomb Bridge** offers a more compact alternative if budget sensitivity is a factor\n\nLet\u2019s follow up with unit-level options at Park 83 \u2014 including any with premium finishes or outdoor views \u2014 and offer to schedule her tour to take advantage of the current promotion."
+  },
+  {
+    "input": {
+      "average_view": [
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "4123 Cedar Springs",
+          "gross_price": "$1,922",
+          "sqft": 1105,
+          "available_units": 25
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "The Lucas Apartments",
+          "gross_price": "$1,931",
+          "sqft": 1184,
+          "available_units": 6
+        },
+        {
+          "beds": 2,
+          "internal": true,
+          "property": "Cortland Oak Lawn",
+          "gross_price": "$2,235",
+          "sqft": 1037,
+          "available_units": 1
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Axis at Wycliff",
+          "gross_price": "$2,262",
+          "sqft": 1128,
+          "available_units": 11
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "2929 Wycliff",
+          "gross_price": "$2,376",
+          "sqft": 1253,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "4110 Fairmount",
+          "gross_price": "$2,376",
+          "sqft": 1130,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Seville Uptown",
+          "gross_price": "$2,620",
+          "sqft": 1203,
+          "available_units": 3
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Griffis Oak Lawn",
+          "gross_price": "$2,755",
+          "sqft": 1203,
+          "available_units": 9
+        }
+      ],
+      "minimum_view": [
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "4123 Cedar Springs",
+          "gross_price": "$1,620",
+          "sqft": 927,
+          "available_units": 25
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "The Lucas Apartments",
+          "gross_price": "$1,707",
+          "sqft": 1143,
+          "available_units": 6
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "2929 Wycliff",
+          "gross_price": "$1,960",
+          "sqft": 1162,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Axis at Wycliff",
+          "gross_price": "$2,060",
+          "sqft": 1035,
+          "available_units": 11
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "4110 Fairmount",
+          "gross_price": "$2,144",
+          "sqft": 1099,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": true,
+          "property": "Cortland Oak Lawn",
+          "gross_price": "$2,235",
+          "sqft": 1037,
+          "available_units": 1
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Seville Uptown",
+          "gross_price": "$2,477",
+          "sqft": 1126,
+          "available_units": 3
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Griffis Oak Lawn",
+          "gross_price": "$2,635",
+          "sqft": 1115,
+          "available_units": 9
+        }
+      ],
+      "maximum_view": [
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "The Lucas Apartments",
+          "gross_price": "$2,051",
+          "sqft": 1298,
+          "available_units": 6
+        },
+        {
+          "beds": 2,
+          "internal": true,
+          "property": "Cortland Oak Lawn",
+          "gross_price": "$2,235",
+          "sqft": 1037,
+          "available_units": 1
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "4123 Cedar Springs",
+          "gross_price": "$2,312",
+          "sqft": 1275,
+          "available_units": 25
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Axis at Wycliff",
+          "gross_price": "$2,545",
+          "sqft": 1259,
+          "available_units": 11
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "2929 Wycliff",
+          "gross_price": "$2,570",
+          "sqft": 1635,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Seville Uptown",
+          "gross_price": "$2,780",
+          "sqft": 1280,
+          "available_units": 3
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "4110 Fairmount",
+          "gross_price": "$3,020",
+          "sqft": 1269,
+          "available_units": 12
+        },
+        {
+          "beds": 2,
+          "internal": false,
+          "property": "Griffis Oak Lawn",
+          "gross_price": "$3,055",
+          "sqft": 1417,
+          "available_units": 9
+        }
+      ],
+      "concessions": [
+        {
+          "property": "Seville Uptown",
+          "concession_text": "Up to 4-Weeks Free!",
+          "from_date": "2025-07-14",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "Griffis Oak Lawn",
+          "concession_text": "One month FREE on readily available homes and $1,000 off on preleased homes!",
+          "from_date": "2025-07-18",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "2929 Wycliff",
+          "concession_text": "$500-$1000 off first full month! *Select units. Limited time only!",
+          "from_date": "2025-07-16",
+          "to_date": "2025-07-22"
+        },
+        {
+          "property": "4110 Fairmount",
+          "concession_text": "One Month Free! Call today for more details!*",
+          "from_date": "2025-05-16",
+          "to_date": "2025-07-22"
+        }
+      ],
+      "prospect": {
+        "client_id": 22215630,
+        "client_email": "kalsekarsamruddhi8@gmail.com",
+        "client_full_name": "Samruddhi Kalsekar",
+        "client_status": "Prospect",
+        "laundry_preference": "Laundry in Unit",
+        "outdoor_space_preference": NaN,
+        "parking_preference": "Any",
+        "pet_preference": NaN,
+        "notes": "-moving with room mate\n-somewhat familiar with the area, has friends who lives in the area\n-fitness center\n-no first floor\n-covered criteria\n-no special to show\n\n",
+        "studio_preference": false,
+        "onebed_preference": false,
+        "twobed_preference": true,
+        "threebed_preference": false,
+        "fourbed_preference": false,
+        "pms_community_id": 4559245,
+        "hellodata_id": "b4d49cf0-609d-5462-9c6a-70d63779b8d1",
+        "hellodata_property": "Cortland Oak Lawn",
+        "oslPropertyID": 4559245,
+        "ParentAssetName": "Cortland Oak Lawn"
+      }
+    },
+    "output": "### 2-Bedroom Overview for Samruddhi Kalsekar  \nSamruddhi is relocating with a roommate and already has some familiarity with the area. She's looking for a 2-bedroom unit with **in-unit laundry**, **no first-floor options**, and **access to a fitness center**. Parking flexibility is noted, and she\u2019s most interested in **Cortland Oak Lawn**.\n\n#### Internal Property Option\n\n**Cortland Oak Lawn**\n- **Average rent**: **$2,235** for **1,037 sq ft**\n- **Minimum**: **$2,235**, **Maximum**: **$2,235** \u2014 one consistent unit offering\n- **1 two-bedroom unit currently available**\n- No current concessions at this time\n- Highlights:\n  - Located in a central Oak Lawn location, near her existing social network\n  - Includes in-unit laundry and access to a full fitness center\n  - Cortland-level finishes and quality, with a quiet boutique-style feel\n  - Strong match for her preferences \u2014 especially for layout and amenity needs\n  - Unit likely not on the first floor due to limited availability (confirm with on-site)\n\n#### Market Context (External Comparisons)\n- Most comps fall between **$1,900\u2013$2,750**, with average sizes around **1,100\u20131,250 sq ft**\n- **4123 Cedar Springs** and **The Lucas Apartments** offer good value per square foot and more availability, but may lack Cortland's finishes or amenities\n- Several external communities are running specials:\n  - **Seville Uptown**: Up to **4 weeks free**\n  - **Griffis Oak Lawn**: 1 month free or **$1,000 off** pre-leased homes\n  - **4110 Fairmount**: One month free\n  - **2929 Wycliff**: Up to **$1,000 off** first full month\n\n---\n\n### Takeaways\n- **Cortland Oak Lawn** is a strong match for Samruddhi\u2019s needs, with in-unit laundry, fitness center access, and a premium living experience \u2014 even without concessions\n- While competitors offer short-term specials, none match the combination of quality, location, and layout alignment offered by Cortland\n- Given limited availability, recommend scheduling a tour promptly to ensure the remaining 2-bed unit is still available\n\nLet\u2019s follow up with unit details and confirm floor level and amenity access before booking a showing."
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "user": "Looking for 1/1 immediately toured with Chase Ward, looking for separate units.",
+    "function_call": {
+      "name": "note_extraction",
+      "arguments": {
+        "onebed_preference": true
+        }
+      }
+    },
+  {
+    "user": "looking for 2x2 - 2x1, moving in asap.",
+    "function_call": {
+      "name": "note_extraction",
+      "arguments": {
+        "twobed_preference": true
+        }
+      }
+    },
+  {
+    "user": "interested in 2 bedroom apt home- would like to move in asap- advised app req. Max budget $1600- prefers first floor",
+    "function_call": {
+      "name": "note_extraction",
+      "arguments": {
+        "twobed_preference": true,
+        "price_ceiling": 1600
+        }
+      }
+    },
+  {
+    "user": "Looking to lease a 2 bed 2 bath unit for $1900/mo or less. The desired move-in date will be around mid-August. ",
+    "function_call": {
+      "name": "note_extraction",
+      "arguments": {
+        "twobed_preference": true,
+        "price_ceiling": 1900
+        }
+      }
+    }
+]

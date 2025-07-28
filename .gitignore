@@ -1,0 +1,6 @@
+.env
+export_clients_head.csv
+export_group_assignment_head.csv
+notes.csv
+test.py
+data/raw/**/*.parquet

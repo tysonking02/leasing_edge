@@ -1,0 +1,5 @@
+openai:
+  api_version: "2024-12-01-preview"
+  azure_endpoint: "https://ai-bi-dev-eastus2.cognitiveservices.azure.com/"
+  model_name: "o4-mini"
+  deployment: "o4-mini-ai-map-generator"
