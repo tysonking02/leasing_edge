@@ -11,7 +11,6 @@ with open(input_path) as f:
     input_data = json.load(f)
 
 summary_output = """
-### 1-Bedroom Overview for Barbara Tracey  
 Barbara reached out requesting information and has received a quote. She's planning to call back to book a tour. Based on her interest in **Cortland Park 83**, here’s how our offerings compare to the surrounding market.
 
 #### Internal Property Options
@@ -69,7 +68,6 @@ with open(input_path) as f:
     input_data = json.load(f)
 
 summary_output = """
-### 2-Bedroom Overview for Samruddhi Kalsekar  
 Samruddhi is relocating with a roommate and already has some familiarity with the area. She's looking for a 2-bedroom unit with **in-unit laundry**, **no first-floor options**, and **access to a fitness center**. Parking flexibility is noted, and she’s most interested in **Cortland Oak Lawn**.
 
 #### Internal Property Option

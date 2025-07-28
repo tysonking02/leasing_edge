@@ -134,11 +134,6 @@ concessions = pull_concessions_data(availability)
 
 availability['beds'] = availability['unit_group'].str.split('x').str[0].astype(int)
 
-st.markdown(f'## {client_name}', unsafe_allow_html=True)
-st.markdown(f'### {hellodata_property}', unsafe_allow_html=True)
-
-st.markdown('<br><br>', unsafe_allow_html=True)
-
 def compute_rollup(df, agg_func):
     rollup = (
         df.groupby(['beds', 'internal', 'property'])
@@ -159,9 +154,16 @@ maximum_view_full = compute_rollup(availability, 'max')
 
 with st.spinner('Summarizing comp data...'):
     summary = orchestrate_rollup_summary(average_view_full, minimum_view_full, maximum_view_full, concessions, merged_prospect)
+
 summary_clean = summary.replace('$', r'\$')
 
-st.markdown(summary_clean, unsafe_allow_html=True)
+st.markdown(f"""
+    <div style="background-color: #f5f5f5; padding: 20px; border-radius: 6px;">
+        <h2>{client_name}</h2>
+        {summary_clean}
+        <br>
+    </div>
+""", unsafe_allow_html=True)
 
 with st.expander('Prospect Info'):
     st.dataframe(merged_prospect)
