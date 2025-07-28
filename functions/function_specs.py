@@ -73,12 +73,22 @@ def generate_rollup_summary_spec():
                         "description": "A list of concessions for the property and its comps",
                         "items": {"type": "object"}
                     },
+                    "amenities": {
+                        "type": "array",
+                        "description": "A list of the building and unit amenities for that property",
+                        "items": {"type": "object"}
+                    },
+                    "fees": {
+                        "type": "array",
+                        "description": "A list of the fees for that property",
+                        "items": {"type": "object"}
+                    },
                     "prospect": {
                         "type": "object",
                         "description": "Merged client data including preferences"
                     }
                 },
-                "required": ["average_view", "minimum_view", "largest_view", "concessions", "prospect"]
+                "required": ["average_view", "minimum_view", "largest_view", "concessions", "amenities", "fees", "prospect"]
             }
         }
     ]

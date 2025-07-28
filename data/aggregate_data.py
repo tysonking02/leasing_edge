@@ -25,6 +25,8 @@ export_clients.head(10).to_csv('export_clients_head.csv')
 
 export_group_assignment = pd.read_parquet('data/raw/export_group_assignment')
 
+print(export_group_assignment['client_status'].unique())
+
 export_group_assignment = export_group_assignment[export_group_assignment['client_status'].isin(['Prospect', 'Toured'])]
 
 export_group_assignment.to_csv('data/processed/export_group_assignment.csv')

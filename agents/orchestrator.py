@@ -52,7 +52,7 @@ def orchestrate_merging_notes(prospect):
     return tool_args, merged_prospect
 
 
-def orchestrate_rollup_summary(average_view, minimum_view, largest_view, concessions, prospect):
+def orchestrate_rollup_summary(average_view, minimum_view, largest_view, concessions, amenities, fees, prospect):
     # 1. Load system prompt
     system_prompt = build_rollup_summary_prompt()
 
@@ -85,6 +85,8 @@ def orchestrate_rollup_summary(average_view, minimum_view, largest_view, concess
                 "minimum_view": minimum_view.to_dict(orient="records"),
                 "largest_view": largest_view.to_dict(orient="records"),
                 "concessions": concessions.to_dict(orient="records"),
+                "amenities": amenities.to_dict(orient="records"),
+                "fees": fees.to_dict(orient="records"),
                 "prospect": prospect.to_dict()
             })
         }
@@ -99,6 +101,6 @@ def orchestrate_rollup_summary(average_view, minimum_view, largest_view, concess
 
     # 4. Parse and return summary
     try:
-        return response.choices[0].message.content.strip()
+        return messages, response.choices[0].message.content.strip()
     except Exception as e:
         raise RuntimeError(f"Failed to extract summary: {e}\n{response.choices[0]}")
