@@ -65,8 +65,18 @@ def pull_amenities(availability, comp_details):
             return target in amenity_list
         return False
 
-    target_amenities = ['community_dog_park', 'swimming_pool', 'valet_trash_service', 'pets_allowed', 'spa', 'fitness_center',
-                        'granite_countertops', 'quartz_countertops', 'marble_countertops']
+    target_amenities = [
+        # Essential building amenities
+        'swimming_pool', 'fitness_center', 'community_dog_park', 'pets_allowed', 'parking_garage',
+        'valet_trash_service', 'package_receiving', 'on_site_maintenance', 'controlled_access',
+        'business_center', 'club_house_party_room', 'barbecue_grill', 'hot_tub', 'tennis_court',
+        'electric_car_charging_station', 'elevator',
+        
+        # Key unit amenities  
+        'washer_dryer_in_unit', 'air_conditioning', 'dishwasher', 'patio_or_balcony', 'walk_in_closet',
+        'granite_countertops', 'quartz_countertops', 'stainless_steel_appliances', 'hardwood_floor',
+        'high_ceilings', 'kitchen_island', 'fireplace', 'smart_thermostat', 'garbage_disposal'
+    ]
 
     for amenity in target_amenities:
         filtered[amenity] = filtered.apply(

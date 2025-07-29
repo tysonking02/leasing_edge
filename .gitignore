@@ -5,3 +5,4 @@ notes.csv
 test.py
 data/raw/**/*.parquet
 test.csv
+start-claude.cmd
