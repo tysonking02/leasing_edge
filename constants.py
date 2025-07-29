@@ -75,7 +75,7 @@ BEDROOM_DISPLAY_NAMES = {
 DAYS_LOOKBACK = 7
 
 # UI Constants
-SIDEBAR_WIDTH = 350
+SIDEBAR_WIDTH = 500
 AGGREGATION_OPTIONS = ['Individual', 'Property Average', 'Property Minimum', 'Property Maximum']
 
 # Example clients display columns
