@@ -15,7 +15,7 @@ from services.validation_service import (
 )
 from utils.ui_helpers import (
     setup_sidebar_styling, setup_modern_app_styling, display_example_clients,
-    get_funnel_id_input, display_bedroom_preference_selector,
+    get_funnel_id_input, get_additional_notes_input, display_bedroom_preference_selector,
     get_submit_button, display_client_summary, display_prospect_info,
     create_unit_view_selectors, display_unit_view
 )
@@ -49,8 +49,12 @@ is_valid, funnel_id, error_msg = validate_funnel_id(funnel_id_input)
 if not is_valid:
     handle_validation_error(error_msg)
 
+additional_notes = get_additional_notes_input()
+
 # Get and validate client data
 client_data = get_client_data(clients, funnel_id)
+
+client_data['notes'] += additional_notes
 
 is_valid, error_msg = validate_client_exists(client_data)
 if not is_valid:

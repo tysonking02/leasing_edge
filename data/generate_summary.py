@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import base64
 
 from agents.orchestrator import orchestrate_rollup_summary
 from config.pull_current_date import pull_current_date
@@ -117,11 +118,26 @@ def pull_amenities(availability, comp_details):
 master_complist = pd.read_csv("data/processed/master_complist.csv")
 internal_ref = pd.read_csv("data/processed/hellodata_internal_ref.csv")
 
+
 def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details):
-    # Create progress bar for detailed steps
+
+    img_container = st.empty()
+
+    with open("pug-run.gif", "rb") as file_:
+        data_url = base64.b64encode(file_.read()).decode("utf-8")
+
+    img_container.markdown(
+        f'''
+        <div style="text-align:center;">
+            <img src="data:image/gif;base64,{data_url}" alt="pug gif" style="width:75px; height:auto;">
+        </div>
+        ''',
+        unsafe_allow_html=True,
+    )
+
     progress_bar = st.progress(0)
     status_text = st.empty()
-    
+
     # Step 1: Load property comparisons
     status_text.text('🔍 Loading property comparisons...')
     progress_bar.progress(10)
@@ -197,5 +213,7 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
     time.sleep(0.5)
     progress_bar.empty()
     status_text.empty()
+
+    img_container.empty()
 
     return messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees, concessions

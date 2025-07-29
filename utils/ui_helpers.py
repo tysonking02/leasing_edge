@@ -246,6 +246,9 @@ def get_funnel_id_input():
     """Get funnel ID input from sidebar."""
     return st.sidebar.text_input(label='Input GC ID')
 
+def get_additional_notes_input():
+    """Ask user for additional notes to be passed to model"""
+    return st.sidebar.text_input(label='Input additional notes on prospect')
 
 def display_bedroom_preference_selector(bed_preferences_default=None):
     """Display bedroom preference multiselect widget."""
