@@ -65,13 +65,26 @@ def pull_concessions_data(availability, concessions_history):
     filtered_concessions = concessions_history[concessions_history['property_id'].isin(availability['hellodata_id'])]
     filtered_concessions = pd.merge(filtered_concessions, availability[['hellodata_id', 'property']], left_on='property_id', right_on='hellodata_id').drop_duplicates()
     
-    return filtered_concessions[['property', 'concession_text', 'from_date', 'to_date']]
+    # Add internal flag
+    filtered_concessions['internal'] = filtered_concessions['hellodata_id'].isin(set(internal_ref['hellodata_id']))
+    
+    return filtered_concessions[['property', 'concession_text', 'from_date', 'to_date', 'internal']]
 
 def pull_fees_data(availability, comp_details):
     fees = comp_details[['asset', 'hellodata_id', 'cats_monthly_rent', 'cats_one_time_fee', 'cats_deposit', 'dogs_monthly_rent', 'dogs_one_time_fee', 
                          'dogs_deposit', 'admin_fee', 'amenity_fee', 'application_fee', 'storage_fee']]
     
     filtered_fees = fees[fees['hellodata_id'].isin(availability['hellodata_id'])].copy()
+    
+    # Round all fee columns to whole numbers
+    fee_columns = ['cats_monthly_rent', 'cats_one_time_fee', 'cats_deposit', 'dogs_monthly_rent', 'dogs_one_time_fee', 
+                   'dogs_deposit', 'admin_fee', 'amenity_fee', 'application_fee', 'storage_fee']
+    
+    for col in fee_columns:
+        filtered_fees[col] = filtered_fees[col].round(0).astype('Int64')
+    
+    # Add internal flag
+    filtered_fees['internal'] = filtered_fees['hellodata_id'].isin(set(internal_ref['hellodata_id']))
 
     return filtered_fees
 
@@ -107,8 +120,11 @@ def pull_amenities(availability, comp_details):
             axis=1
         )
 
+    # Add internal flag before grouping
+    filtered['internal'] = filtered['hellodata_id'].isin(set(internal_ref['hellodata_id']))
+
     agg_amenities = (
-        filtered.groupby('asset')[target_amenities]
+        filtered.groupby(['asset', 'internal'])[target_amenities]
         .any()
         .reset_index()
     )
@@ -117,6 +133,16 @@ def pull_amenities(availability, comp_details):
 
 master_complist = pd.read_csv("data/processed/master_complist.csv")
 internal_ref = pd.read_csv("data/processed/hellodata_internal_ref.csv")
+
+def style_internal_assets(df):
+    """Apply styling to highlight internal asset rows with #a6cf54 background"""
+    def highlight_internal(row):
+        if 'internal' in row.index and row['internal']:
+            return ['background-color: #a6cf54'] * len(row)
+        else:
+            return [''] * len(row)
+    
+    return df.style.apply(highlight_internal, axis=1)
 
 
 def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details):
@@ -128,8 +154,30 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
 
     img_container.markdown(
         f'''
-        <div style="text-align:center;">
-            <img src="data:image/gif;base64,{data_url}" alt="pug gif" style="width:75px; height:auto;">
+        <style>
+        @keyframes movePug {{
+            0% {{
+                transform: translateX(-100px);
+            }}
+            100% {{
+                transform: translateX(calc(100vw - 75px));
+            }}
+        }}
+        .pug-container {{
+            position: relative;
+            width: 100%;
+            height: 75px;
+            overflow: hidden;
+        }}
+        .moving-pug {{
+            position: absolute;
+            width: 75px;
+            height: auto;
+            animation: movePug 5s linear infinite;
+        }}
+        </style>
+        <div class="pug-container">
+            <img src="data:image/gif;base64,{data_url}" alt="pug gif" class="moving-pug">
         </div>
         ''',
         unsafe_allow_html=True,

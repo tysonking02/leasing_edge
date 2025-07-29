@@ -1,7 +1,7 @@
 import streamlit as st
 
 from agents.orchestrator import orchestrate_merging_notes
-from data.generate_summary import generate_summary
+from data.generate_summary import generate_summary, style_internal_assets
 from services.data_loader import load_all_data
 from services.client_service import (
     get_client_data, merge_client_with_assignments, 
@@ -109,16 +109,16 @@ if submit:
             )
 
         with st.expander('Amenities Breakdown'):
-            st.dataframe(amenities, use_container_width=True)
+            st.dataframe(style_internal_assets(amenities), use_container_width=True)
 
         with st.expander('Concessions Breakdown'):
             if len(concessions) > 0:
-                st.dataframe(concessions, use_container_width=True)
+                st.dataframe(style_internal_assets(concessions), use_container_width=True)
             else:
                 st.info("No active concessions found for the available properties.")
 
         with st.expander('Fees Breakdown'):
-            st.dataframe(fees, use_container_width=True)
+            st.dataframe(style_internal_assets(fees), use_container_width=True)
 
     with debug_tab:
 
