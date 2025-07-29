@@ -6,6 +6,9 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from agents.orchestrator import orchestrate_merging_notes, orchestrate_rollup_summary
+from config.pull_current_date import pull_current_date
+
+cur_date = pull_current_date()
 
 clients = pd.read_csv(
     "data/processed/export_clients.csv", 
@@ -43,7 +46,7 @@ concessions_history = pd.read_csv(
     usecols=['property_id', 'from_date', 'to_date', 'concession_text']
 )
 
-concessions_history = concessions_history[pd.to_datetime(concessions_history['to_date']) >= pd.Timestamp.now() - pd.Timedelta(days=7)]
+concessions_history = concessions_history[pd.to_datetime(concessions_history['to_date']) >= cur_date - pd.Timedelta(days=7)]
 
 def pull_concessions_data(availability):
     filtered_concessions = concessions_history[concessions_history['property_id'].isin(availability['hellodata_id'])]
@@ -69,7 +72,7 @@ def extract_unit_hist(unit_history, prospect):
 
     # Parse and filter by date (past 7 days)
     unit_history_df['date'] = pd.to_datetime(unit_history_df['date'])
-    unit_history_df = unit_history_df[unit_history_df['date'] >= pd.Timestamp.now() - pd.Timedelta(days=7)]
+    unit_history_df = unit_history_df[unit_history_df['date'] >= cur_date - pd.Timedelta(days=7)]
 
     return unit_history_df[['hellodata_id', 'property', 'unit_name', 'unit_group', 'sqft', 'gross_price', 'date']].drop_duplicates(subset=['unit_name'], keep='last')
 

@@ -4,6 +4,9 @@ import re
 
 from agents.orchestrator import orchestrate_merging_notes, orchestrate_rollup_summary
 from data.generate_summary import generate_summary
+from config.pull_current_date import pull_current_date
+
+cur_date = pull_current_date()
 
 st.markdown("""
     <style>
@@ -59,7 +62,7 @@ def load_concessions():
         usecols=['property_id', 'from_date', 'to_date', 'concession_text']
     )
 
-    return all_concessions[pd.to_datetime(all_concessions['to_date']) >= pd.Timestamp.now() - pd.Timedelta(days=7)]
+    return all_concessions[pd.to_datetime(all_concessions['to_date']) >= cur_date - pd.Timedelta(days=7)]
 
 @st.cache_data
 def load_comp_details():
@@ -78,9 +81,6 @@ comp_details = load_comp_details()
 
 st.sidebar.header('Leasing Edge Tool')
 
-# with st.sidebar.expander('Find GC IDs'):
-#     property_select = st.selectbox('Select Property', options=sorted(internal_ref['hellodata_property'].unique()))
-
 example_clients = pd.merge(clients, group_assignment, left_on = 'client_id', right_on = 'clientid')
 example_clients = pd.merge(example_clients, internal_ref, left_on = 'pms_community_id', right_on = 'oslPropertyID')
 example_clients = example_clients[['client_id', 'client_full_name', 'ParentAssetName']]
@@ -89,8 +89,6 @@ with st.sidebar.expander('Example GC IDs'):
     st.write(example_clients.sort_values('client_id', ascending=False).reset_index(drop=True))
 
 funnel_id = st.sidebar.text_input(label='Input GC ID')
-
-submit = st.sidebar.button("Submit")
 
 if funnel_id == '':
     st.stop()
@@ -112,70 +110,96 @@ if len(client_data) == 0:
 
 prospect = client_data.iloc[0]
 
-tool_args, merged_prospect = orchestrate_merging_notes(prospect)
+bed_dict = {
+    0: 'studio_preference',
+    1: 'onebed_preference',
+    2: 'twobed_preference',
+    3: 'threebed_preference'
+}
 
-hellodata_property = merged_prospect['hellodata_property']
-hellodata_id = merged_prospect['hellodata_id']
-client_name = merged_prospect['client_full_name']
+if not any([prospect.get('studio_preference'), prospect.get('onebed_preference'), 
+            prospect.get('twobed_preference'), prospect.get('threebed_preference')]):
+    
+    st.sidebar.warning('Prospect has no listed bedroom preferences')
+    bed_preferences = st.sidebar.multiselect(
+        label='Select Bed Preferences',
+        options=[0, 1, 2, 3],
+        format_func=lambda x: ['Studio', '1 Bed', '2 Bed', '3 Bed'][x],
+        default=[]
+    )
 
-messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees = \
-    generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details)
+    for beds in bed_preferences:
+        prospect[bed_dict[beds]] = True
 
-summary_tab, details_tab, debug_tab = st.tabs(['AI Summary', 'Details', 'Debug'])
+submit = st.sidebar.button("Submit")
 
-with summary_tab:
+if submit:
 
-    st.markdown(f"""
-        <div style="background-color: #f5f5f5; padding: 20px; border-radius: 6px;">
-            <h2>{client_name}</h2>
-            {summary_clean}
-        </div>
-    """, unsafe_allow_html=True)
+    tool_args, merged_prospect = orchestrate_merging_notes(prospect)
 
-    st.markdown('<br>', unsafe_allow_html=True)
+    hellodata_property = merged_prospect['hellodata_property']
+    hellodata_id = merged_prospect['hellodata_id']
+    client_name = merged_prospect['client_full_name']
 
-with details_tab:
+    messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees = \
+        generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details)
 
-    with st.expander('Prospect Info'):
-        st.dataframe(merged_prospect)
+    summary_tab, details_tab, debug_tab = st.tabs(['AI Summary', 'Details', 'Debug'])
 
-    with st.expander('View Available Units'):
-        # selectors
-        col1, col2 = st.columns([1,1])
-        with col1:
-            bed_count_select = st.selectbox(
-                'Select Bed Count',
-                options=sorted(availability['beds'].unique()),
-            )
-        with col2:
-            agg_select = st.selectbox(
-                'Select Rollup',
-                options=['Individual', 'Property Average', 'Property Minimum', 'Property Maximum']
-            )
+    with summary_tab:
 
-        # slice out just that bed count for display
-        individual_view = availability[availability['beds']==int(bed_count_select)].drop(columns='hellodata_id')
-        avg_view = average_view_full[average_view_full['beds']==int(bed_count_select)]
-        min_view = minimum_view_full[minimum_view_full['beds']==int(bed_count_select)]
-        max_view = maximum_view_full[maximum_view_full['beds']==int(bed_count_select)]
+        st.markdown(f"""
+            <div style="background-color: #f5f5f5; padding: 20px; border-radius: 6px;">
+                <h2>{client_name}</h2>
+                {summary_clean}
+            </div>
+        """, unsafe_allow_html=True)
 
-        # show the table
-        if agg_select=='Individual':
-            st.dataframe(individual_view)
-        elif agg_select=='Property Average':
-            st.dataframe(avg_view)
-        elif agg_select=='Property Maximum':
-            st.dataframe(max_view)
-        else:
-            st.dataframe(min_view)
+        st.markdown('<br>', unsafe_allow_html=True)
 
-    with st.expander('Amenities Breakdown'):
-        st.write(amenities)
+    with details_tab:
 
-    with st.expander('Fees Breakdown'):
-        st.write(fees)
+        with st.expander('Prospect Info'):
+            st.dataframe(merged_prospect)
 
-with debug_tab:
+        with st.expander('View Available Units'):
+            # selectors
+            col1, col2 = st.columns([1,1])
+            with col1:
+                bed_count_select = st.selectbox(
+                    'Select Bed Count',
+                    options = sorted(availability['beds'].unique()),
+                )
 
-    with st.expander('Messages to LLM'):
-        st.write(messages)
+            with col2:
+                agg_select = st.selectbox(
+                    'Select Rollup',
+                    options=['Individual', 'Property Average', 'Property Minimum', 'Property Maximum']
+                )
+
+            # slice out just that bed count for display
+            individual_view = availability[availability['beds']==int(bed_count_select)].drop(columns='hellodata_id')
+            avg_view = average_view_full[average_view_full['beds']==int(bed_count_select)]
+            min_view = minimum_view_full[minimum_view_full['beds']==int(bed_count_select)]
+            max_view = maximum_view_full[maximum_view_full['beds']==int(bed_count_select)]
+
+            # show the table
+            if agg_select=='Individual':
+                st.dataframe(individual_view)
+            elif agg_select=='Property Average':
+                st.dataframe(avg_view)
+            elif agg_select=='Property Maximum':
+                st.dataframe(max_view)
+            else:
+                st.dataframe(min_view)
+
+        with st.expander('Amenities Breakdown'):
+            st.write(amenities)
+
+        with st.expander('Fees Breakdown'):
+            st.write(fees)
+
+    with debug_tab:
+
+        with st.expander('Messages to LLM'):
+            st.write(messages)

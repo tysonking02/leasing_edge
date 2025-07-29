@@ -1,6 +1,10 @@
 import pandas as pd
+import streamlit as st
 
 from agents.orchestrator import orchestrate_rollup_summary
+from config.pull_current_date import pull_current_date
+
+cur_date = pull_current_date()
 
 def extract_unit_hist(unit_history, prospect):
     unit_history_df = unit_history.copy()
@@ -20,7 +24,7 @@ def extract_unit_hist(unit_history, prospect):
 
     # Parse and filter by date (past 7 days)
     unit_history_df['date'] = pd.to_datetime(unit_history_df['date'])
-    unit_history_df = unit_history_df[unit_history_df['date'] >= pd.Timestamp.now() - pd.Timedelta(days=7)]
+    unit_history_df = unit_history_df[unit_history_df['date'] >= cur_date - pd.Timedelta(days=7)]
 
     return unit_history_df[['hellodata_id', 'property', 'unit_name', 'unit_group', 'sqft', 'gross_price', 'date']].drop_duplicates(subset=['unit_name'], keep='last')
 
