@@ -53,7 +53,13 @@ def pull_amenities(availability, comp_details):
     filtered = amenities[amenities['hellodata_id'].isin(availability['hellodata_id'])].copy()
 
     def has_amenity(amenity_list, target):
-        return target in amenity_list
+        if amenity_list is None:
+            return False
+        if isinstance(amenity_list, str):
+            return target in amenity_list
+        if hasattr(amenity_list, '__iter__'):
+            return target in amenity_list
+        return False
 
     target_amenities = ['community_dog_park', 'swimming_pool', 'valet_trash_service', 'pets_allowed', 'spa', 'fitness_center',
                         'granite_countertops', 'quartz_countertops', 'marble_countertops']

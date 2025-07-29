@@ -5,6 +5,14 @@ import re
 from agents.orchestrator import orchestrate_merging_notes, orchestrate_rollup_summary
 from data.generate_summary import generate_summary
 
+st.markdown("""
+    <style>
+        [data-testid="stSidebar"] {
+            width: 350px;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 @st.cache_data
 def load_clients():
     return pd.read_csv(
@@ -73,11 +81,12 @@ st.sidebar.header('Leasing Edge Tool')
 # with st.sidebar.expander('Find GC IDs'):
 #     property_select = st.selectbox('Select Property', options=sorted(internal_ref['hellodata_property'].unique()))
 
+example_clients = pd.merge(clients, group_assignment, left_on = 'client_id', right_on = 'clientid')
+example_clients = pd.merge(example_clients, internal_ref, left_on = 'pms_community_id', right_on = 'oslPropertyID')
+example_clients = example_clients[['client_id', 'client_full_name', 'ParentAssetName']]
+
 with st.sidebar.expander('Example GC IDs'):
-    example_ids = [22215630, 18858422, 22273015, 21781634, 21610964, 20503383]
-    
-    for cid in example_ids:
-        st.markdown(f"- `{cid}`")
+    st.write(example_clients.sort_values('client_id', ascending=False).reset_index(drop=True))
 
 funnel_id = st.sidebar.text_input(label='Input GC ID')
 
