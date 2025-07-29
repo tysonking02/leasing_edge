@@ -71,7 +71,16 @@ def prepare_example_clients(clients, group_assignment, internal_ref):
         right_on='oslPropertyID'
     )
     
-    return example_clients[EXAMPLE_CLIENT_COLUMNS].sort_values(
+    result = example_clients[EXAMPLE_CLIENT_COLUMNS].sort_values(
         'client_id', 
         ascending=False
     ).reset_index(drop=True)
+    
+    # Rename columns for display
+    result = result.rename(columns={
+        'client_id': 'Client ID',
+        'client_full_name': 'Client Name', 
+        'ParentAssetName': 'Asset'
+    })
+    
+    return result

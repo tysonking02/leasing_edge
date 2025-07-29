@@ -14,7 +14,7 @@ from services.validation_service import (
     safe_get_prospect_data
 )
 from utils.ui_helpers import (
-    setup_sidebar_styling, display_example_clients,
+    setup_sidebar_styling, setup_modern_app_styling, display_example_clients,
     get_funnel_id_input, display_bedroom_preference_selector,
     get_submit_button, display_client_summary,
     create_unit_view_selectors, display_unit_view
@@ -22,6 +22,7 @@ from utils.ui_helpers import (
 
 # Setup UI styling
 setup_sidebar_styling()
+setup_modern_app_styling()
 
 # Load all data
 data = load_all_data()

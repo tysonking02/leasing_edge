@@ -31,11 +31,33 @@ def extract_unit_hist(unit_history, prospect):
 def get_availability(comps, hellodata_id, prospect):
     availability = pd.DataFrame()
     for _, row in comps.iterrows():
-        unit_history = pd.read_csv(f"data/raw/unit_history/{row['hellodata_id']}.csv")
-        unit_history['hellodata_id'] = row['hellodata_id']
-        unit_history_df = extract_unit_hist(unit_history, prospect)
-        unit_history_df['internal'] = row['hellodata_id'] in set(internal_ref['hellodata_id'])
-        availability = pd.concat([availability, unit_history_df], ignore_index=True)
+        try:
+            unit_history = pd.read_csv(f"data/raw/unit_history/{row['hellodata_id']}.csv")
+            
+            # Check if CSV is empty
+            if unit_history.empty:
+                is_internal = row['hellodata_id'] in set(internal_ref['hellodata_id'])
+                if is_internal:
+                    st.error(f"Internal property {row['property']} has no unit history data")
+                    return pd.DataFrame()  # Return empty to stop processing
+                else:
+                    # Skip external comps with empty data
+                    continue
+            
+            unit_history['hellodata_id'] = row['hellodata_id']
+            unit_history_df = extract_unit_hist(unit_history, prospect)
+            unit_history_df['internal'] = row['hellodata_id'] in set(internal_ref['hellodata_id'])
+            availability = pd.concat([availability, unit_history_df], ignore_index=True)
+            
+        except (pd.errors.EmptyDataError, FileNotFoundError) as e:
+            is_internal = row['hellodata_id'] in set(internal_ref['hellodata_id'])
+            if is_internal:
+                st.error(f"Internal property {row['property']} has missing or invalid unit history data")
+                return pd.DataFrame()  # Return empty to stop processing
+            else:
+                # Skip external comps with missing/invalid data
+                continue
+                
     return availability
 
 def pull_concessions_data(availability, concessions_history):
@@ -97,9 +119,15 @@ internal_ref = pd.read_csv("data/processed/hellodata_internal_ref.csv")
 
 def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details):
     comps = master_complist[master_complist['property'] == hellodata_property]
+    
+    # Check if property has any comps
+    if len(comps) == 0:
+        st.error(f"This property ({hellodata_property}) has no listed comps")
+        return None, None, None, None, None, None, None, None
+    
     availability = get_availability(comps, hellodata_id, merged_prospect)
     if len(availability) == 0:
-        print('')
+        st.error("No units available for the selected bedroom preferences")
         return None, None, None, None, None, None, None, None
 
     concessions = pull_concessions_data(availability, concessions_history)
