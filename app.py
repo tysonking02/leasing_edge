@@ -78,7 +78,6 @@ if not has_bedroom_preferences(prospect):
 submit = get_submit_button()
 
 if submit:
-
     tool_args, merged_prospect = orchestrate_merging_notes(prospect)
 
     hellodata_property = merged_prospect['hellodata_property']
@@ -91,36 +90,66 @@ if submit:
     if messages is None:
         st.stop()
 
-    summary_tab, details_tab, debug_tab = st.tabs(['AI Summary', 'Details', 'Debug'])
+    # Store data in session state for navigation
+    st.session_state.data_loaded = True
+    st.session_state.client_name = client_name
+    st.session_state.summary_clean = summary_clean
+    st.session_state.merged_prospect = merged_prospect
+    st.session_state.availability = availability
+    st.session_state.average_view_full = average_view_full
+    st.session_state.minimum_view_full = minimum_view_full
+    st.session_state.maximum_view_full = maximum_view_full
+    st.session_state.amenities = amenities
+    st.session_state.fees = fees
+    st.session_state.concessions = concessions
+    st.session_state.messages = messages
 
-    with summary_tab:
-        display_client_summary(client_name, summary_clean)
+# Check if data is loaded before showing navigation
+if st.session_state.get('data_loaded', False):
+    
+    # Define navigation page functions
+    def ai_summary_page():
+        display_client_summary(st.session_state.client_name, st.session_state.summary_clean)
+    
+    def prospect_info_page():
+        display_prospect_info(st.session_state.merged_prospect)
+    
+    def view_availability_page():
+        bed_count_select, agg_select = create_unit_view_selectors(st.session_state.availability)
+        display_unit_view(
+            bed_count_select, agg_select, st.session_state.availability,
+            st.session_state.average_view_full, st.session_state.minimum_view_full, st.session_state.maximum_view_full
+        )
+    
+    def amenities_page():
+        st.dataframe(style_internal_assets(st.session_state.amenities), use_container_width=True)
+    
+    def concessions_page():
+        if len(st.session_state.concessions) > 0:
+            st.dataframe(style_internal_assets(st.session_state.concessions), use_container_width=True)
+        else:
+            st.info("No active concessions found for the available properties.")
+    
+    def fees_page():
+        st.dataframe(style_internal_assets(st.session_state.fees), use_container_width=True)
+    
+    def debug_page():
+        st.write(st.session_state.messages)
 
-    with details_tab:
+    # Create page objects
+    ai_summary = st.Page(ai_summary_page, title="AI Summary")
+    prospect_info = st.Page(prospect_info_page, title="Prospect Info")
+    view_availability = st.Page(view_availability_page, title="View Availability")
+    amenities = st.Page(amenities_page, title="Amenities Breakdown")
+    concessions = st.Page(concessions_page, title="Concessions Breakdown")
+    fees = st.Page(fees_page, title="Fees Breakdown")
+    debug = st.Page(debug_page, title="Debug")
 
-        with st.expander('Prospect Info'):
-            display_prospect_info(merged_prospect)
-
-        with st.expander('View Available Units'):
-            bed_count_select, agg_select = create_unit_view_selectors(availability)
-            display_unit_view(
-                bed_count_select, agg_select, availability,
-                average_view_full, minimum_view_full, maximum_view_full
-            )
-
-        with st.expander('Amenities Breakdown'):
-            st.dataframe(style_internal_assets(amenities), use_container_width=True)
-
-        with st.expander('Concessions Breakdown'):
-            if len(concessions) > 0:
-                st.dataframe(style_internal_assets(concessions), use_container_width=True)
-            else:
-                st.info("No active concessions found for the available properties.")
-
-        with st.expander('Fees Breakdown'):
-            st.dataframe(style_internal_assets(fees), use_container_width=True)
-
-    with debug_tab:
-
-        with st.expander('Messages to LLM'):
-            st.write(messages)
+    # Create navigation
+    pg = st.navigation({
+        "Main": [ai_summary],
+        "Details": [prospect_info, view_availability, amenities, concessions, fees],
+        "Debug": [debug]
+    }, position="top")
+    
+    pg.run()

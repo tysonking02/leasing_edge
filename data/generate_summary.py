@@ -89,7 +89,7 @@ def pull_fees_data(availability, comp_details):
     return filtered_fees
 
 def pull_amenities(availability, comp_details):
-    amenities = comp_details[['asset', 'hellodata_id', 'building_amenities', 'unit_amenities']]
+    amenities = comp_details[['asset', 'year_built', 'hellodata_id', 'building_amenities', 'unit_amenities']]
     filtered = amenities[amenities['hellodata_id'].isin(availability['hellodata_id'])].copy()
 
     def has_amenity(amenity_list, target):
@@ -122,9 +122,12 @@ def pull_amenities(availability, comp_details):
 
     # Add internal flag before grouping
     filtered['internal'] = filtered['hellodata_id'].isin(set(internal_ref['hellodata_id']))
+    
+    # Round year_built to whole number
+    filtered['year_built'] = filtered['year_built'].round(0).astype('Int64')
 
     agg_amenities = (
-        filtered.groupby(['asset', 'internal'])[target_amenities]
+        filtered.groupby(['asset', 'year_built', 'internal'])[target_amenities]
         .any()
         .reset_index()
     )
@@ -164,10 +167,15 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
             }}
         }}
         .pug-container {{
-            position: relative;
+            position: fixed;
+            top: 50%;
+            left: 0;
             width: 100%;
             height: 75px;
+            transform: translateY(-50%);
             overflow: hidden;
+            z-index: 1000;
+            pointer-events: none;
         }}
         .moving-pug {{
             position: absolute;
@@ -185,6 +193,49 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
 
     progress_bar = st.progress(0)
     status_text = st.empty()
+    
+    # Add CSS and JavaScript to center progress bar and status text
+    st.markdown(
+        """
+        <style>
+        .centered-progress {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            padding: 20px !important;
+            border-radius: 10px !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+            width: 400px !important;
+            text-align: center !important;
+            z-index: 1001 !important;
+        }
+        </style>
+        <script>
+        setTimeout(function() {
+            // Find the progress bar and text elements
+            const progressBar = document.querySelector('.stProgress');
+            const textElements = document.querySelectorAll('[data-testid="stText"]');
+            
+            if (progressBar) {
+                progressBar.classList.add('centered-progress');
+            }
+            
+            textElements.forEach(function(textEl) {
+                if (textEl.textContent.includes('🔍') || textEl.textContent.includes('🏢') || 
+                    textEl.textContent.includes('💰') || textEl.textContent.includes('🏊') || 
+                    textEl.textContent.includes('📊') || textEl.textContent.includes('📈') || 
+                    textEl.textContent.includes('🤖') || textEl.textContent.includes('✅')) {
+                    textEl.classList.add('centered-progress');
+                    textEl.style.top = '45%';
+                }
+            });
+        }, 100);
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
 
     # Step 1: Load property comparisons
     status_text.text('🔍 Loading property comparisons...')
