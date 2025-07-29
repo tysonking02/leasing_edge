@@ -1,0 +1,208 @@
+"""
+UI helper functions for Streamlit interface.
+"""
+
+import streamlit as st
+from constants import SIDEBAR_WIDTH, BEDROOM_DISPLAY_NAMES, AGGREGATION_OPTIONS
+
+
+def setup_sidebar_styling():
+    """Apply custom CSS styling to sidebar and overall app."""
+    st.markdown(f"""
+        <style>
+            /* Sidebar styling */
+            [data-testid="stSidebar"] {{
+                width: {SIDEBAR_WIDTH}px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding-top: 2rem;
+            }}
+            
+            /* Sidebar header styling */
+            .sidebar .sidebar-content {{
+                background: transparent;
+            }}
+            
+            /* Main content area */
+            .main .block-container {{
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }}
+            
+            /* Custom button styling */
+            .stButton > button {{
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 0.5rem 1.5rem;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }}
+            
+            .stButton > button:hover {{
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }}
+            
+            /* Selectbox styling */
+            .stSelectbox > div > div {{
+                border-radius: 8px;
+                border: 2px solid #e1e5e9;
+                transition: border-color 0.3s ease;
+            }}
+            
+            .stSelectbox > div > div:hover {{
+                border-color: #667eea;
+            }}
+            
+            /* Text input styling */
+            .stTextInput > div > div > input {{
+                border-radius: 8px;
+                border: 2px solid #e1e5e9;
+                transition: border-color 0.3s ease;
+            }}
+            
+            .stTextInput > div > div > input:focus {{
+                border-color: #667eea;
+                box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+            }}
+            
+            /* Multiselect styling */
+            .stMultiSelect > div > div {{
+                border-radius: 8px;
+                border: 2px solid #e1e5e9;
+            }}
+            
+            /* Tab styling */
+            .stTabs [data-baseweb="tab-list"] {{
+                gap: 8px;
+            }}
+            
+            .stTabs [data-baseweb="tab"] {{
+                background: #f8f9fa;
+                border-radius: 8px;
+                padding: 0.5rem 1rem;
+                border: none;
+                font-weight: 500;
+            }}
+            
+            .stTabs [aria-selected="true"] {{
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+            }}
+        </style>
+    """, unsafe_allow_html=True)
+
+
+def display_example_clients(example_clients):
+    """Display example clients in sidebar expander with improved styling."""
+    with st.sidebar.expander('📋 Example GC IDs', expanded=False):
+        st.markdown("""
+            <style>
+            .example-clients {
+                background: rgba(255,255,255,0.1);
+                border-radius: 8px;
+                padding: 0.5rem;
+                margin: 0.5rem 0;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        
+        # Display top 10 most recent clients with better formatting
+        top_clients = example_clients.head(10)
+        for _, client in top_clients.iterrows():
+            st.markdown(f"""
+                <div class="example-clients">
+                    <strong>ID:</strong> {client['client_id']}<br>
+                    <strong>Name:</strong> {client['client_full_name']}<br>
+                    <small>{client['ParentAssetName']}</small>
+                </div>
+            """, unsafe_allow_html=True)
+
+
+def get_funnel_id_input():
+    """Get funnel ID input from sidebar with improved styling."""
+    st.sidebar.markdown("### 🔍 Client Lookup")
+    return st.sidebar.text_input(
+        label='Enter GC ID', 
+        placeholder='e.g., 12345678',
+        help='Enter the client\'s unique identifier to search'
+    )
+
+
+def display_bedroom_preference_selector(bed_preferences_default=None):
+    """Display bedroom preference multiselect widget with improved styling."""
+    if bed_preferences_default is None:
+        bed_preferences_default = []
+    
+    st.sidebar.markdown("### 🏠 Bedroom Preferences")
+    st.sidebar.info("⚠️ This client has no bedroom preferences set. Please select their preferences:")
+    
+    return st.sidebar.multiselect(
+        label='Select Preferred Unit Types',
+        options=[0, 1, 2, 3],
+        format_func=lambda x: BEDROOM_DISPLAY_NAMES[x],
+        default=bed_preferences_default,
+        help='Select all unit types the client is interested in'
+    )
+
+
+def get_submit_button():
+    """Display submit button in sidebar with improved styling."""
+    st.sidebar.markdown("---")
+    return st.sidebar.button(
+        "🚀 Generate Report", 
+        use_container_width=True,
+        help="Generate AI-powered leasing recommendations"
+    )
+
+
+def display_client_summary(client_name, summary_clean):
+    """Display client summary in formatted container."""
+    st.markdown(f"""
+        <div style="background-color: #f5f5f5; padding: 20px; border-radius: 6px;">
+            <h2>{client_name}</h2>
+            {summary_clean}
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown('<br>', unsafe_allow_html=True)
+
+
+def create_unit_view_selectors(availability):
+    """Create bed count and aggregation selectors for unit view."""
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        bed_count_select = st.selectbox(
+            'Select Bed Count',
+            options=sorted(availability['beds'].unique()),
+        )
+    
+    with col2:
+        agg_select = st.selectbox(
+            'Select Rollup',
+            options=AGGREGATION_OPTIONS
+        )
+    
+    return bed_count_select, agg_select
+
+
+def display_unit_view(bed_count_select, agg_select, availability, average_view_full, minimum_view_full, maximum_view_full):
+    """Display unit view based on selections."""
+    # Filter views by bed count
+    individual_view = availability[availability['beds'] == int(bed_count_select)].drop(columns='hellodata_id')
+    avg_view = average_view_full[average_view_full['beds'] == int(bed_count_select)]
+    min_view = minimum_view_full[minimum_view_full['beds'] == int(bed_count_select)]
+    max_view = maximum_view_full[maximum_view_full['beds'] == int(bed_count_select)]
+    
+    # Display appropriate view
+    if agg_select == 'Individual':
+        st.dataframe(individual_view)
+    elif agg_select == 'Property Average':
+        st.dataframe(avg_view)
+    elif agg_select == 'Property Maximum':
+        st.dataframe(max_view)
+    else:  # Property Minimum
+        st.dataframe(min_view)

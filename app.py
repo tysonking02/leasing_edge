@@ -1,137 +1,76 @@
-import pandas as pd
 import streamlit as st
-import re
 
-from agents.orchestrator import orchestrate_merging_notes, orchestrate_rollup_summary
+from agents.orchestrator import orchestrate_merging_notes
 from data.generate_summary import generate_summary
-from config.pull_current_date import pull_current_date
+from services.data_loader import load_all_data
+from services.client_service import (
+    get_client_data, merge_client_with_assignments, 
+    has_bedroom_preferences, set_bedroom_preferences,
+    prepare_example_clients
+)
+from services.validation_service import (
+    validate_funnel_id, validate_client_exists, 
+    validate_client_active, handle_validation_error,
+    safe_get_prospect_data
+)
+from utils.ui_helpers import (
+    setup_sidebar_styling, display_example_clients,
+    get_funnel_id_input, display_bedroom_preference_selector,
+    get_submit_button, display_client_summary,
+    create_unit_view_selectors, display_unit_view
+)
 
-cur_date = pull_current_date()
+# Setup UI styling
+setup_sidebar_styling()
 
-st.markdown("""
-    <style>
-        [data-testid="stSidebar"] {
-            width: 350px;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-@st.cache_data
-def load_clients():
-    return pd.read_csv(
-        "data/processed/export_clients.csv", 
-        usecols=[
-            'client_id', 'client_email', 'client_full_name', 'client_status', 
-            'laundry_preference', 'outdoor_space_preference', 'parking_preference', 
-            'pet_preference', 'notes',
-            'studio_preference', 'onebed_preference', 'twobed_preference', 
-            'threebed_preference', 'fourbed_preference'
-        ], 
-        dtype={
-            'client_id': int, 'client_email': str, 'client_full_name': str, 'client_status': str, 'laundry_preference': str, 
-            'outdoor_space_preference': str, 'parking_preference': str, 'pet_preference': str,
-            'studio_preference': bool, 'onebed_preference': bool, 'twobed_preference': bool, 'threebed_preference': bool, 'fourbed_preference': bool, 
-            'notes': str
-        }
-    )
-
-@st.cache_data
-def load_group_assignment():
-    return pd.read_csv(
-        "data/processed/export_group_assignment.csv",
-        usecols=['clientid', 'pms_community_id'],
-        dtype={'clientid': 'Int64', 'pms_community_id': 'Int64'}
-    )
-
-@st.cache_data
-def load_internal_ref():
-    return pd.read_csv(
-        "data/processed/hellodata_internal_ref.csv"
-    )
-
-@st.cache_data
-def load_master_complist():
-    return pd.read_csv(
-        "data/processed/master_complist.csv"
-    )
-
-@st.cache_data
-def load_concessions():
-    all_concessions = pd.read_csv(
-        "data/raw/concessions_history.csv",
-        usecols=['property_id', 'from_date', 'to_date', 'concession_text']
-    )
-
-    return all_concessions[pd.to_datetime(all_concessions['to_date']) >= cur_date - pd.Timedelta(days=7)]
-
-@st.cache_data
-def load_comp_details():
-    return pd.read_csv(
-        "data/processed/comp_details.csv",
-        usecols=['asset', 'hellodata_id', 'year_built', 'cats_monthly_rent', 'cats_one_time_fee', 'cats_deposit', 'dogs_monthly_rent', 'dogs_one_time_fee', 'dogs_deposit',
-                 'admin_fee', 'amenity_fee', 'application_fee', 'storage_fee', 'property_quality', 'building_amenities', 'unit_amenities']
-    )
-
-clients = load_clients()
-group_assignment = load_group_assignment()
-internal_ref = load_internal_ref()
-master_complist = load_master_complist()
-concessions_history = load_concessions()
-comp_details = load_comp_details()
+# Load all data
+data = load_all_data()
+clients = data['clients']
+group_assignment = data['group_assignment']
+internal_ref = data['internal_ref']
+master_complist = data['master_complist']
+concessions_history = data['concessions_history']
+comp_details = data['comp_details']
 
 st.sidebar.header('Leasing Edge Tool')
 
-example_clients = pd.merge(clients, group_assignment, left_on = 'client_id', right_on = 'clientid')
-example_clients = pd.merge(example_clients, internal_ref, left_on = 'pms_community_id', right_on = 'oslPropertyID')
-example_clients = example_clients[['client_id', 'client_full_name', 'ParentAssetName']]
+# Prepare and display example clients
+example_clients = prepare_example_clients(clients, group_assignment, internal_ref)
+display_example_clients(example_clients)
 
-with st.sidebar.expander('Example GC IDs'):
-    st.write(example_clients.sort_values('client_id', ascending=False).reset_index(drop=True))
+# Get and validate funnel ID input
+funnel_id_input = get_funnel_id_input()
 
-funnel_id = st.sidebar.text_input(label='Input GC ID')
-
-if funnel_id == '':
+if not funnel_id_input:
     st.stop()
 
-funnel_id = int(funnel_id)
+is_valid, funnel_id, error_msg = validate_funnel_id(funnel_id_input)
+if not is_valid:
+    handle_validation_error(error_msg)
 
-client_data = clients[clients['client_id'] == funnel_id]
+# Get and validate client data
+client_data = get_client_data(clients, funnel_id)
 
-if len(client_data) == 0:
-    st.sidebar.warning('Invalid GC ID')
-    st.stop()
+is_valid, error_msg = validate_client_exists(client_data)
+if not is_valid:
+    handle_validation_error(error_msg)
 
-client_data = pd.merge(client_data, group_assignment, left_on = 'client_id', right_on = 'clientid').drop(columns='clientid')
-client_data = pd.merge(client_data, internal_ref, left_on = 'pms_community_id', right_on = 'oslPropertyID')
+# Merge client data with assignments
+merged_client_data = merge_client_with_assignments(client_data, group_assignment, internal_ref)
 
-if len(client_data) == 0:
-    st.sidebar.warning('Prospect is no longer active')
-    st.stop()
+is_valid, error_msg = validate_client_active(merged_client_data)
+if not is_valid:
+    handle_validation_error(error_msg)
 
-prospect = client_data.iloc[0]
+prospect = safe_get_prospect_data(merged_client_data)
 
-bed_dict = {
-    0: 'studio_preference',
-    1: 'onebed_preference',
-    2: 'twobed_preference',
-    3: 'threebed_preference'
-}
-
-if not any([prospect.get('studio_preference'), prospect.get('onebed_preference'), 
-            prospect.get('twobed_preference'), prospect.get('threebed_preference')]):
-    
+# Handle bedroom preferences
+if not has_bedroom_preferences(prospect):
     st.sidebar.warning('Prospect has no listed bedroom preferences')
-    bed_preferences = st.sidebar.multiselect(
-        label='Select Bed Preferences',
-        options=[0, 1, 2, 3],
-        format_func=lambda x: ['Studio', '1 Bed', '2 Bed', '3 Bed'][x],
-        default=[]
-    )
+    bed_preferences = display_bedroom_preference_selector()
+    prospect = set_bedroom_preferences(prospect, bed_preferences)
 
-    for beds in bed_preferences:
-        prospect[bed_dict[beds]] = True
-
-submit = st.sidebar.button("Submit")
+submit = get_submit_button()
 
 if submit:
 
@@ -152,15 +91,7 @@ if submit:
     summary_tab, details_tab, debug_tab = st.tabs(['AI Summary', 'Details', 'Debug'])
 
     with summary_tab:
-
-        st.markdown(f"""
-            <div style="background-color: #f5f5f5; padding: 20px; border-radius: 6px;">
-                <h2>{client_name}</h2>
-                {summary_clean}
-            </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown('<br>', unsafe_allow_html=True)
+        display_client_summary(client_name, summary_clean)
 
     with details_tab:
 
@@ -168,35 +99,11 @@ if submit:
             st.dataframe(merged_prospect)
 
         with st.expander('View Available Units'):
-            # selectors
-            col1, col2 = st.columns([1,1])
-            with col1:
-                bed_count_select = st.selectbox(
-                    'Select Bed Count',
-                    options = sorted(availability['beds'].unique()),
-                )
-
-            with col2:
-                agg_select = st.selectbox(
-                    'Select Rollup',
-                    options=['Individual', 'Property Average', 'Property Minimum', 'Property Maximum']
-                )
-
-            # slice out just that bed count for display
-            individual_view = availability[availability['beds']==int(bed_count_select)].drop(columns='hellodata_id')
-            avg_view = average_view_full[average_view_full['beds']==int(bed_count_select)]
-            min_view = minimum_view_full[minimum_view_full['beds']==int(bed_count_select)]
-            max_view = maximum_view_full[maximum_view_full['beds']==int(bed_count_select)]
-
-            # show the table
-            if agg_select=='Individual':
-                st.dataframe(individual_view)
-            elif agg_select=='Property Average':
-                st.dataframe(avg_view)
-            elif agg_select=='Property Maximum':
-                st.dataframe(max_view)
-            else:
-                st.dataframe(min_view)
+            bed_count_select, agg_select = create_unit_view_selectors(availability)
+            display_unit_view(
+                bed_count_select, agg_select, availability,
+                average_view_full, minimum_view_full, maximum_view_full
+            )
 
         with st.expander('Amenities Breakdown'):
             st.write(amenities)
