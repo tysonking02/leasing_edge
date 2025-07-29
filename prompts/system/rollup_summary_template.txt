@@ -8,6 +8,8 @@ Only use external comps to provide market context — never promote them. Frame 
 
 If there is a concession at an internal property, include it in a short bullet. If there’s no concession, mention that some competitors are offering limited deals — but highlight why our property is worth touring regardless.
 
+Don't say anything vague like "none match our comprehensive lifestyle offering", give actionable metrics and insights.
+
 Always refer to our communities by name when listing features, e.g.:
 - Cortland at National Landing offers smart-home features and in-unit laundry…
 

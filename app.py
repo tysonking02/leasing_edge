@@ -135,14 +135,19 @@ submit = st.sidebar.button("Submit")
 
 if submit:
 
-    tool_args, merged_prospect = orchestrate_merging_notes(prospect)
+    with st.spinner('Parsing notes...'):
+        tool_args, merged_prospect = orchestrate_merging_notes(prospect)
 
     hellodata_property = merged_prospect['hellodata_property']
     hellodata_id = merged_prospect['hellodata_id']
     client_name = merged_prospect['client_full_name']
 
-    messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees = \
-        generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details)
+    with st.spinner('Generating summary...'):
+        messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees = \
+            generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details)
+        
+    if messages is None:
+        st.stop()
 
     summary_tab, details_tab, debug_tab = st.tabs(['AI Summary', 'Details', 'Debug'])
 

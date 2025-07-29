@@ -88,6 +88,10 @@ internal_ref = pd.read_csv("data/processed/hellodata_internal_ref.csv")
 def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details):
     comps = master_complist[master_complist['property'] == hellodata_property]
     availability = get_availability(comps, hellodata_id, merged_prospect)
+    if len(availability) == 0:
+        print('')
+        return None, None, None, None, None, None, None, None
+
     concessions = pull_concessions_data(availability, concessions_history)
     amenities = pull_amenities(availability, comp_details)
     fees = pull_fees_data(availability, comp_details)
