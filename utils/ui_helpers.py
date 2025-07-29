@@ -3,6 +3,7 @@ UI helper functions for Streamlit interface.
 """
 
 import streamlit as st
+import pandas as pd
 from constants import SIDEBAR_WIDTH, BEDROOM_DISPLAY_NAMES, AGGREGATION_OPTIONS
 
 
@@ -266,6 +267,7 @@ def get_submit_button():
 
 def display_client_summary(client_name, summary_clean):
     """Display client summary in formatted container."""
+    # Create styled container with header and content
     st.markdown(f"""
         <div style="
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -278,20 +280,54 @@ def display_client_summary(client_name, summary_clean):
             <h2 style="
                 color: #183c7d;
                 font-weight: 700;
-                margin-bottom: 20px;
+                margin: 0 0 20px 0;
                 font-size: 1.75rem;
                 border-bottom: 2px solid #183c7d;
                 padding-bottom: 8px;
             ">{client_name}</h2>
-            <div style="
-                line-height: 1.6;
-                color: #495057;
-                font-size: 0.95rem;
-            ">
-                {summary_clean}
-            </div>
         </div>
     """, unsafe_allow_html=True)
+    
+    # Display markdown content with proper rendering
+    st.markdown(summary_clean)
+
+
+def display_prospect_info(prospect):
+    """Display prospect information in a clean, formatted layout."""
+    # Extract bedroom preferences
+    preferences = []
+    if prospect.get('studio_preference'): preferences.append('Studio')
+    if prospect.get('onebed_preference'): preferences.append('1 Bedroom')
+    if prospect.get('twobed_preference'): preferences.append('2 Bedroom')
+    if prospect.get('threebed_preference'): preferences.append('3 Bedroom')
+    if prospect.get('fourbed_preference'): preferences.append('4+ Bedroom')
+    
+    preferences_text = ', '.join(preferences) if preferences else 'None specified'
+    
+    # Clean up notes
+    notes_text = prospect.get('notes', 'No notes available')
+    if pd.isna(notes_text) or notes_text == 'nan':
+        notes_text = 'No notes available'
+    
+    # Use columns for layout
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("**Client Name**")
+        st.write(prospect.get('client_full_name', 'N/A'))
+        
+        st.markdown("**Status**")  
+        st.write(prospect.get('client_status', 'N/A'))
+    
+    with col2:
+        st.markdown("**Email**")
+        st.write(prospect.get('client_email', 'N/A'))
+        
+        st.markdown("**Bedroom Preferences**")
+        st.write(preferences_text)
+    
+    st.markdown("**Notes**")
+    st.info(notes_text)
 
 
 def create_unit_view_selectors(availability):

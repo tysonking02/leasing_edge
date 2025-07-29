@@ -16,7 +16,7 @@ from services.validation_service import (
 from utils.ui_helpers import (
     setup_sidebar_styling, setup_modern_app_styling, display_example_clients,
     get_funnel_id_input, display_bedroom_preference_selector,
-    get_submit_button, display_client_summary,
+    get_submit_button, display_client_summary, display_prospect_info,
     create_unit_view_selectors, display_unit_view
 )
 
@@ -75,16 +75,14 @@ submit = get_submit_button()
 
 if submit:
 
-    with st.spinner('Parsing notes...'):
-        tool_args, merged_prospect = orchestrate_merging_notes(prospect)
+    tool_args, merged_prospect = orchestrate_merging_notes(prospect)
 
     hellodata_property = merged_prospect['hellodata_property']
     hellodata_id = merged_prospect['hellodata_id']
     client_name = merged_prospect['client_full_name']
 
-    with st.spinner('Generating summary...'):
-        messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees = \
-            generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details)
+    messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees, concessions = \
+        generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details)
         
     if messages is None:
         st.stop()
@@ -97,7 +95,7 @@ if submit:
     with details_tab:
 
         with st.expander('Prospect Info'):
-            st.dataframe(merged_prospect)
+            display_prospect_info(merged_prospect)
 
         with st.expander('View Available Units'):
             bed_count_select, agg_select = create_unit_view_selectors(availability)
@@ -107,10 +105,16 @@ if submit:
             )
 
         with st.expander('Amenities Breakdown'):
-            st.write(amenities)
+            st.dataframe(amenities, use_container_width=True)
+
+        with st.expander('Concessions Breakdown'):
+            if len(concessions) > 0:
+                st.dataframe(concessions, use_container_width=True)
+            else:
+                st.info("No active concessions found for the available properties.")
 
         with st.expander('Fees Breakdown'):
-            st.write(fees)
+            st.dataframe(fees, use_container_width=True)
 
     with debug_tab:
 

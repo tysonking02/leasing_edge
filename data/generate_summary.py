@@ -118,22 +118,50 @@ master_complist = pd.read_csv("data/processed/master_complist.csv")
 internal_ref = pd.read_csv("data/processed/hellodata_internal_ref.csv")
 
 def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details):
+    # Create progress bar for detailed steps
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    
+    # Step 1: Load property comparisons
+    status_text.text('🔍 Loading property comparisons...')
+    progress_bar.progress(10)
     comps = master_complist[master_complist['property'] == hellodata_property]
     
     # Check if property has any comps
     if len(comps) == 0:
+        progress_bar.empty()
+        status_text.empty()
         st.error(f"This property ({hellodata_property}) has no listed comps")
         return None, None, None, None, None, None, None, None
     
+    # Step 2: Process unit availability
+    status_text.text('🏢 Processing unit availability data...')
+    progress_bar.progress(30)
     availability = get_availability(comps, hellodata_id, merged_prospect)
     if len(availability) == 0:
+        progress_bar.empty()
+        status_text.empty()
         st.error("No units available for the selected bedroom preferences")
         return None, None, None, None, None, None, None, None
 
+    # Step 3: Gather concessions data
+    status_text.text('💰 Gathering concessions and pricing data...')
+    progress_bar.progress(50)
     concessions = pull_concessions_data(availability, concessions_history)
+    
+    # Step 4: Process amenities
+    status_text.text('🏊 Processing amenities data...')
+    progress_bar.progress(65)
     amenities = pull_amenities(availability, comp_details)
+    
+    # Step 5: Calculate fees
+    status_text.text('📊 Calculating fees and charges...')
+    progress_bar.progress(75)
     fees = pull_fees_data(availability, comp_details)
 
+    # Step 6: Computing rollup views
+    status_text.text('📈 Computing pricing rollups and statistics...')
+    progress_bar.progress(85)
     availability['beds'] = availability['unit_group'].str.split('x').str[0].astype(int)
 
     def compute_rollup(df, agg_func):
@@ -154,8 +182,20 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
     minimum_view_full = compute_rollup(availability, 'min')
     maximum_view_full = compute_rollup(availability, 'max')
 
+    # Step 7: Generating AI summary
+    status_text.text('🤖 Generating AI-powered market summary...')
+    progress_bar.progress(95)
     messages, summary = orchestrate_rollup_summary(average_view_full, minimum_view_full, maximum_view_full, concessions, amenities, fees, merged_prospect)
 
+    # Step 8: Finalizing
+    status_text.text('✅ Summary complete!')
+    progress_bar.progress(100)
     summary_clean = summary.replace('$', r'\$')
+    
+    # Clean up progress indicators
+    import time
+    time.sleep(0.5)
+    progress_bar.empty()
+    status_text.empty()
 
-    return messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees
+    return messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees, concessions
