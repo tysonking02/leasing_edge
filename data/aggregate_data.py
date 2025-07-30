@@ -17,8 +17,8 @@ for layout, col_name in layout_types.items():
 
 export_clients = export_clients[export_clients['client_status'].isin(['Prospect', 'Toured'])]
 
-# filter to last 6 months of prospects
-export_clients = export_clients[pd.to_datetime(export_clients['created_at']) >= pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=180)]
+# filter to last year of prospects
+export_clients = export_clients[pd.to_datetime(export_clients['created_at']) >= pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=365)]
 
 export_clients.to_csv('data/processed/export_clients.csv')
 export_clients.head(10).to_csv('export_clients_head.csv')

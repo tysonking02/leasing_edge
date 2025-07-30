@@ -246,6 +246,83 @@ def get_funnel_id_input():
     """Get funnel ID input from sidebar."""
     return st.sidebar.text_input(label='Input GC ID')
 
+
+def get_autocomplete_funnel_id_input(clients):
+    """Get funnel ID input with autocomplete functionality."""
+    from services.client_service import search_clients
+    
+    # Initialize session state for search
+    if 'search_query' not in st.session_state:
+        st.session_state.search_query = ''
+    if 'selected_client_id' not in st.session_state:
+        st.session_state.selected_client_id = None
+    if 'show_dropdown' not in st.session_state:
+        st.session_state.show_dropdown = False
+    
+    st.sidebar.markdown("**Search Client by ID or Name**")
+    
+    # Search input
+    search_query = st.sidebar.text_input(
+        label='Type to search clients...',
+        value=st.session_state.search_query,
+        key='search_input',
+        placeholder='Enter client ID or name'
+    )
+    
+    # Update search query in session state
+    if search_query != st.session_state.search_query:
+        st.session_state.search_query = search_query
+        st.session_state.show_dropdown = len(search_query) > 0
+        st.session_state.selected_client_id = None
+    
+    # Show search results
+    selected_client = None
+    if st.session_state.show_dropdown and len(search_query) > 0:
+        search_results = search_clients(clients, search_query, limit=8)
+        
+        if search_results:
+            st.sidebar.markdown("**Select from matches:**")
+            
+            # Create clickable options
+            for result in search_results:
+                if st.sidebar.button(
+                    result['display'], 
+                    key=f"client_{result['id']}",
+                    use_container_width=True
+                ):
+                    st.session_state.selected_client_id = result['id']
+                    st.session_state.search_query = str(result['id'])
+                    st.session_state.show_dropdown = False
+                    selected_client = result['id']
+                    st.rerun()
+        elif len(search_query) > 2:  # Only show "no results" if query is substantial
+            st.sidebar.info("No matching clients found")
+    
+    # Manual ID input option
+    if st.sidebar.checkbox("Enter ID manually", key="manual_id_checkbox"):
+        manual_id = st.sidebar.text_input(
+            "Enter Client ID directly:",
+            key="manual_id_input"
+        )
+        if manual_id:
+            return manual_id
+    
+    # Return selected client ID or current search query if it looks like an ID
+    if st.session_state.selected_client_id:
+        return st.session_state.selected_client_id
+    elif search_query and search_query.isdigit():
+        return int(search_query)
+    elif search_query:
+        # Check if search query exactly matches a client ID
+        try:
+            exact_matches = search_clients(clients, search_query, limit=1)
+            if exact_matches and str(exact_matches[0]['id']).lower() == search_query.lower():
+                return exact_matches[0]['id']
+        except:
+            pass
+    
+    return None
+
 def get_additional_notes_input():
     """Ask user for additional notes to be passed to model"""
     return st.sidebar.text_input(label='Input additional notes on prospect')

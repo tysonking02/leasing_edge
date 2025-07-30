@@ -13,7 +13,7 @@ def validate_funnel_id(funnel_id_input):
     Returns:
         tuple: (is_valid, funnel_id, error_message)
     """
-    if not funnel_id_input or funnel_id_input.strip() == '':
+    if not funnel_id_input or funnel_id_input == '':
         return False, None, "Please enter a GC ID"
     
     try:

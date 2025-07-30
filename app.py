@@ -15,7 +15,7 @@ from services.validation_service import (
 )
 from utils.ui_helpers import (
     setup_sidebar_styling, setup_modern_app_styling, display_example_clients,
-    get_funnel_id_input, get_additional_notes_input, display_bedroom_preference_selector,
+    get_funnel_id_input, get_autocomplete_funnel_id_input, get_additional_notes_input, display_bedroom_preference_selector,
     get_submit_button, display_client_summary, display_prospect_info,
     create_unit_view_selectors, display_unit_view
 )
@@ -39,8 +39,8 @@ st.sidebar.header('Leasing Edge Tool')
 example_clients = prepare_example_clients(clients, group_assignment, internal_ref)
 display_example_clients(example_clients)
 
-# Get and validate funnel ID input
-funnel_id_input = get_funnel_id_input()
+# Get and validate funnel ID input using autocomplete
+funnel_id_input = get_autocomplete_funnel_id_input(clients)
 
 if not funnel_id_input:
     st.stop()
