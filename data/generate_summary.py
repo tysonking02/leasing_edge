@@ -168,7 +168,7 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
         }}
         .pug-container {{
             position: fixed;
-            top: 50%;
+            top: 60%;
             left: 0;
             width: 100%;
             height: 75px;
@@ -191,92 +191,143 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
         unsafe_allow_html=True,
     )
 
-    progress_bar = st.progress(0)
-    status_text = st.empty()
+    # Create centered container with custom HTML
+    progress_container = st.empty()
     
-    # Add CSS and JavaScript to center progress bar and status text
-    st.markdown(
-        """
-        <style>
-        .centered-progress {
-            position: fixed !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            background: rgba(255, 255, 255, 0.9) !important;
-            padding: 20px !important;
-            border-radius: 10px !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-            width: 400px !important;
-            text-align: center !important;
-            z-index: 1001 !important;
-        }
-        </style>
-        <script>
-        setTimeout(function() {
-            // Find the progress bar and text elements
-            const progressBar = document.querySelector('.stProgress');
-            const textElements = document.querySelectorAll('[data-testid="stText"]');
-            
-            if (progressBar) {
-                progressBar.classList.add('centered-progress');
-            }
-            
-            textElements.forEach(function(textEl) {
-                if (textEl.textContent.includes('🔍') || textEl.textContent.includes('🏢') || 
-                    textEl.textContent.includes('💰') || textEl.textContent.includes('🏊') || 
-                    textEl.textContent.includes('📊') || textEl.textContent.includes('📈') || 
-                    textEl.textContent.includes('🤖') || textEl.textContent.includes('✅')) {
-                    textEl.classList.add('centered-progress');
-                    textEl.style.top = '45%';
-                }
-            });
-        }, 100);
-        </script>
-        """,
-        unsafe_allow_html=True
-    )
+    with progress_container.container():
+        # Add the overlay container CSS
+        st.markdown(
+            """
+            <div id="progress-overlay" style="
+                position: fixed;
+                top: 0;
+                left: 21rem;
+                width: calc(100vw - 21rem);
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1001;
+                pointer-events: none;
+            ">
+                <div id="progress-box" style="
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 30px;
+                    border-radius: 15px;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                    width: 400px;
+                    text-align: center;
+                    pointer-events: auto;
+                ">
+                    <div id="status-text" style="
+                        font-weight: bold;
+                        margin-bottom: 15px;
+                        font-size: 16px;
+                    ">🔍 Loading property comparisons...</div>
+                    <div id="progress-container" style="
+                        width: 100%;
+                        height: 10px;
+                        background-color: #f0f0f0;
+                        border-radius: 5px;
+                        overflow: hidden;
+                    ">
+                        <div id="progress-fill" style="
+                            height: 100%;
+                            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+                            border-radius: 5px;
+                            width: 10%;
+                            transition: width 0.3s ease;
+                        "></div>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    
+    # Function to update progress
+    def update_progress(percentage, text):
+        progress_container.markdown(
+            f"""
+            <div id="progress-overlay" style="
+                position: fixed;
+                top: 0;
+                left: 21rem;
+                width: calc(100vw - 21rem);
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1001;
+                pointer-events: none;
+            ">
+                <div id="progress-box" style="
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 30px;
+                    border-radius: 15px;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                    width: 400px;
+                    text-align: center;
+                    pointer-events: auto;
+                ">
+                    <div id="status-text" style="
+                        font-weight: bold;
+                        margin-bottom: 15px;
+                        font-size: 16px;
+                    ">{text}</div>
+                    <div id="progress-container" style="
+                        width: 100%;
+                        height: 10px;
+                        background-color: #f0f0f0;
+                        border-radius: 5px;
+                        overflow: hidden;
+                    ">
+                        <div id="progress-fill" style="
+                            height: 100%;
+                            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+                            border-radius: 5px;
+                            width: {percentage}%;
+                            transition: width 0.3s ease;
+                        "></div>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
     # Step 1: Load property comparisons
-    status_text.text('🔍 Loading property comparisons...')
-    progress_bar.progress(10)
+    update_progress(10, '🔍 Loading property comparisons...')
     comps = master_complist[master_complist['property'] == hellodata_property]
     
     # Check if property has any comps
     if len(comps) == 0:
-        progress_bar.empty()
-        status_text.empty()
+        progress_container.empty()
         st.error(f"This property ({hellodata_property}) has no listed comps")
         return None, None, None, None, None, None, None, None
     
     # Step 2: Process unit availability
-    status_text.text('🏢 Processing unit availability data...')
-    progress_bar.progress(30)
+    update_progress(30, '🏢 Processing unit availability data...')
     availability = get_availability(comps, hellodata_id, merged_prospect)
     if len(availability) == 0:
-        progress_bar.empty()
-        status_text.empty()
+        progress_container.empty()
         st.error("No units available for the selected bedroom preferences")
         return None, None, None, None, None, None, None, None
 
     # Step 3: Gather concessions data
-    status_text.text('💰 Gathering concessions and pricing data...')
-    progress_bar.progress(50)
+    update_progress(50, '💰 Gathering concessions and pricing data...')
     concessions = pull_concessions_data(availability, concessions_history)
     
     # Step 4: Process amenities
-    status_text.text('🏊 Processing amenities data...')
-    progress_bar.progress(65)
+    update_progress(65, '🏊 Processing amenities data...')
     amenities = pull_amenities(availability, comp_details)
     
     # Step 5: Calculate fees
-    status_text.text('📊 Calculating fees and charges...')
-    progress_bar.progress(75)
+    update_progress(75, '📊 Calculating fees and charges...')
     fees = pull_fees_data(availability, comp_details)
 
     # Step 6: Computing rollup views
-    status_text.text('📈 Computing pricing rollups and statistics...')
-    progress_bar.progress(85)
+    update_progress(85, '📈 Computing pricing rollups and statistics...')
     availability['beds'] = availability['unit_group'].str.split('x').str[0].astype(int)
 
     def compute_rollup(df, agg_func):
@@ -298,21 +349,17 @@ def generate_summary(hellodata_property, hellodata_id, merged_prospect, concessi
     maximum_view_full = compute_rollup(availability, 'max')
 
     # Step 7: Generating AI summary
-    status_text.text('🤖 Generating AI-powered market summary...')
-    progress_bar.progress(95)
+    update_progress(95, '🤖 Generating AI-powered market summary...')
     messages, summary = orchestrate_rollup_summary(average_view_full, minimum_view_full, maximum_view_full, concessions, amenities, fees, merged_prospect)
 
     # Step 8: Finalizing
-    status_text.text('✅ Summary complete!')
-    progress_bar.progress(100)
+    update_progress(100, '✅ Summary complete!')
     summary_clean = summary.replace('$', r'\$')
     
     # Clean up progress indicators
     import time
     time.sleep(0.5)
-    progress_bar.empty()
-    status_text.empty()
-
+    progress_container.empty()
     img_container.empty()
 
     return messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees, concessions
