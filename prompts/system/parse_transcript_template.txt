@@ -25,10 +25,12 @@ MoveInDate: When they want to move in (e.g., "immediately", "end of month", "Jan
 Elevator: Elevator preferences or requirements (e.g., "elevator required", "no elevator needed", "prefers elevator").
 
 Rules:
-- Extract only information that is explicitly mentioned or clearly implied in the conversation
-- If information is not mentioned or unclear, leave the field blank
-- Use direct quotes or close paraphrases when possible
-- If multiple options are discussed, include all relevant options
-- Ignore agent suggestions unless the customer shows interest or agreement
-- Focus on customer preferences, not agent descriptions of available units
+- Extract ONLY preferences that the CUSTOMER explicitly states themselves
+- Do NOT extract information from agent summaries, confirmations, or suggestions unless the customer specifically agrees to that individual preference
+- If information is not mentioned by the customer or unclear, leave the field blank
+- Use direct quotes or close paraphrases from customer statements when possible
+- If multiple options are discussed by the customer, include all relevant options
+- When agents provide summaries (e.g., "you prefer..."), only extract items the customer explicitly confirmed individually, not general agreement to the entire summary
+- Focus on customer preferences, not agent descriptions of available units or agent assumptions
 - If customer changes their mind during the conversation, use their final stated preference
+- General responses like "yes, that sounds great" to agent summaries do NOT constitute explicit agreement to individual preferences within that summary

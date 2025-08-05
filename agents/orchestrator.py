@@ -56,7 +56,9 @@ def orchestrate_transcript_parsing(client_id):
         
         for key, value in extracted_preferences.items():
             if value:
-                df.at[0, key] = value
+                # Escape dollar signs to prevent markdown formatting issues
+                escaped_value = str(value).replace('$', r'\$')
+                df.at[0, key] = escaped_value
 
         if 'transcript' in df.columns:
             df = df.drop(columns=['transcript'])
