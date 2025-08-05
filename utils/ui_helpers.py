@@ -372,7 +372,7 @@ def display_client_summary(client_name, summary_clean):
     st.markdown(summary_clean)
 
 
-def display_prospect_info(prospect):
+def display_prospect_info(prospect, transcript):
     """Display prospect information in a clean, formatted layout."""
     # Extract bedroom preferences
     preferences = []
@@ -405,9 +405,73 @@ def display_prospect_info(prospect):
         
         st.markdown("**Bedroom Preferences**")
         st.write(preferences_text)
-    
-    st.markdown("**Notes**")
+
+    st.markdown("---")
+    st.markdown("**Recorded Notes**")
     st.info(notes_text)
+    
+    # Check if we have transcript-parsed data
+    transcript_fields = ['Bedrooms', 'Bathrooms', 'Pet', 'Floor', 'Laundry', 'Parking', 
+                        'Amenities', 'Storage', 'LeaseTerm', 'MoveInDate', 'Elevator']
+    
+    has_transcript_data = any(prospect.get(field) for field in transcript_fields)
+    
+    if has_transcript_data:
+        st.markdown("---")
+        st.markdown("**Notes from Call Transcript**")
+        
+        col3, col4 = st.columns(2)
+        
+        with col3:
+            if prospect.get('Bedrooms'):
+                st.markdown("**Bedrooms**")
+                st.write(prospect.get('Bedrooms'))
+            
+            if prospect.get('Bathrooms'):
+                st.markdown("**Bathrooms**")
+                st.write(prospect.get('Bathrooms'))
+            
+            if prospect.get('Pet'):
+                st.markdown("**Pet Requirements**")
+                st.write(prospect.get('Pet'))
+            
+            if prospect.get('Floor'):
+                st.markdown("**Floor Preference**")
+                st.write(prospect.get('Floor'))
+            
+            if prospect.get('Laundry'):
+                st.markdown("**Laundry**")
+                st.write(prospect.get('Laundry'))
+            
+            if prospect.get('Parking'):
+                st.markdown("**Parking**")
+                st.write(prospect.get('Parking'))
+        
+        with col4:
+            if prospect.get('Amenities'):
+                st.markdown("**Desired Amenities**")
+                st.write(prospect.get('Amenities'))
+            
+            if prospect.get('Storage'):
+                st.markdown("**Storage Requirements**")
+                st.write(prospect.get('Storage'))
+            
+            if prospect.get('LeaseTerm'):
+                st.markdown("**Lease Term**")
+                st.write(prospect.get('LeaseTerm'))
+            
+            if prospect.get('MoveInDate'):
+                st.markdown("**Move-in Date**")
+                st.write(prospect.get('MoveInDate'))
+            
+            if prospect.get('Elevator'):
+                st.markdown("**Elevator Preference**")
+                st.write(prospect.get('Elevator'))
+
+    if transcript != '':
+        st.markdown("---")
+        with st.expander('Full Transcripts'):
+            st.markdown(transcript, unsafe_allow_html=True)
 
 
 def create_unit_view_selectors(availability):

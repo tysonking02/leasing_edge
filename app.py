@@ -1,6 +1,6 @@
 import streamlit as st
 
-from agents.orchestrator import orchestrate_merging_notes
+from agents.orchestrator import orchestrate_merging_notes, orchestrate_transcript_parsing
 from data.generate_summary import generate_summary, style_internal_assets
 from services.data_loader import load_all_data
 from services.client_service import (
@@ -78,11 +78,25 @@ if not has_bedroom_preferences(prospect):
 submit = get_submit_button()
 
 if submit:
-    tool_args, merged_prospect = orchestrate_merging_notes(prospect)
-
+    
+    try:
+        with st.spinner('Parsing Transcript...'):
+            tool_args, transcript_df, transcript = orchestrate_transcript_parsing(str(funnel_id))
+        if not transcript_df.empty:
+            transcript_data = transcript_df.iloc[0].to_dict()
+            for key, value in transcript_data.items():
+                if key != 'client_id' and value:
+                    prospect[key] = value
+            merged_prospect = prospect
+        else:
+            tool_args, merged_prospect = orchestrate_merging_notes(prospect)
+            
+    except Exception as e:
+        tool_args, merged_prospect = orchestrate_merging_notes(prospect)
+    
     hellodata_property = merged_prospect['hellodata_property']
     hellodata_id = merged_prospect['hellodata_id']
-    client_name = merged_prospect['client_full_name']
+    client_name = merged_prospect.get('client_full_name', 'Unknown Client')
 
     messages, average_view_full, minimum_view_full, maximum_view_full, summary_clean, availability, amenities, fees, concessions = \
         generate_summary(hellodata_property, hellodata_id, merged_prospect, concessions_history, comp_details)
@@ -103,6 +117,7 @@ if submit:
     st.session_state.fees = fees
     st.session_state.concessions = concessions
     st.session_state.messages = messages
+    st.session_state.transcript = transcript
 
 # Check if data is loaded before showing navigation
 if st.session_state.get('data_loaded', False):
@@ -112,7 +127,7 @@ if st.session_state.get('data_loaded', False):
         display_client_summary(st.session_state.client_name, st.session_state.summary_clean)
     
     def prospect_info_page():
-        display_prospect_info(st.session_state.merged_prospect)
+        display_prospect_info(st.session_state.merged_prospect, st.session_state.transcript)
     
     def view_availability_page():
         bed_count_select, agg_select = create_unit_view_selectors(st.session_state.availability)

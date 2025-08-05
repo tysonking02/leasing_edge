@@ -1,16 +1,71 @@
 import json
+import pandas as pd
 import streamlit as st
 
 from logic.llm_client import call_openai_with_functions
-from prompts.system.generate_prompts import build_note_extraction_prompt, build_rollup_summary_prompt
-from functions.function_specs import note_extraction_specs, rollup_summary_spec
+from prompts.system.generate_prompts import build_rollup_summary_prompt, build_note_extraction_prompt
+from functions.function_specs import rollup_summary_spec, note_extraction_specs, transcript_parsing_specs
 from logic.merge_data import merge_data
+from logic.transcript_parser import get_transcript_data
+from prompts.system.generate_prompts import build_parse_transcript_prompt
 
 
 def load_query_examples(path):
     with open(path, "r") as f:
         return json.load(f)
     
+def orchestrate_transcript_parsing(client_id):
+    """
+    Parse transcript data for a given client ID and return extracted preferences.
+    
+    Args:
+        client_id (str): The client ID to parse transcript for
+        
+    Returns:
+        tuple: (extracted_data_dict, dataframe_with_preferences, transcript_text)
+    """
+    try:
+        # Get transcript data from database
+        transcript, df = get_transcript_data(client_id)
+        
+        # If no transcript found, return empty results
+        if transcript is None or df.empty:
+            return {}, pd.DataFrame(), ''
+        
+        # Get system prompt for transcript parsing
+        system_prompt = build_parse_transcript_prompt()
+        
+        # Construct messages for OpenAI call
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": transcript}
+        ]
+        
+        response = call_openai_with_functions(
+            function_specs=transcript_parsing_specs,
+            messages=messages
+        )
+        
+        extracted_preferences = {}
+        try:
+            tool_calls = response.choices[0].message.tool_calls
+            if tool_calls and tool_calls[0].function.name == "transcript_parsing":
+                extracted_preferences = json.loads(tool_calls[0].function.arguments)
+        except Exception:
+            pass
+        
+        for key, value in extracted_preferences.items():
+            if value:
+                df.at[0, key] = value
+
+        if 'transcript' in df.columns:
+            df = df.drop(columns=['transcript'])
+        
+        return extracted_preferences, df, transcript
+        
+    except Exception as e:
+        return {}, pd.DataFrame(), ''
+
 def orchestrate_merging_notes(prospect):
     if prospect['notes']:
         return {}, prospect
@@ -59,15 +114,15 @@ def orchestrate_rollup_summary(average_view, minimum_view, largest_view, concess
     examples = load_query_examples(path="prompts/examples/rollup_examples.json")
 
     messages = [{"role": "system", "content": system_prompt}]
-    for ex in examples:
-        messages.append({
-            "role": "user",
-            "content": json.dumps(ex["input"], indent=2)
-        })
-        messages.append({
-            "role": "assistant",
-            "content": ex["output"]
-        })
+    # for ex in examples:
+    #     messages.append({
+    #         "role": "user",
+    #         "content": json.dumps(ex["input"], indent=2)
+    #     })
+    #     messages.append({
+    #         "role": "assistant",
+    #         "content": ex["output"]
+    #     })
 
 
     messages.append({

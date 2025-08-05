@@ -15,6 +15,13 @@ def build_note_extraction_prompt():
 
     return template
 
+def build_parse_transcript_prompt():
+    # Load template
+    with open("prompts/system/parse_transcript_template.txt", encoding="utf-8") as f:
+        template = f.read()
+
+    return template
+
 def build_rollup_summary_prompt():
     # Load template
     with open("prompts/system/rollup_summary_template.txt", encoding="utf-8") as f:

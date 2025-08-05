@@ -93,5 +93,69 @@ def generate_rollup_summary_spec():
         }
     ]
 
+def generate_transcript_parsing_specs():
+    properties = {
+        "bedrooms": {
+            "type": "string",
+            "description": "Bedroom preferences mentioned in the transcript"
+        },
+        "bathrooms": {
+            "type": "string", 
+            "description": "Bathroom preferences mentioned in the transcript"
+        },
+        "pet": {
+            "type": "string",
+            "description": "Pet-related requirements or mentions from the transcript"
+        },
+        "floor": {
+            "type": "string",
+            "description": "Floor preferences mentioned in the transcript"
+        },
+        "laundry": {
+            "type": "string",
+            "description": "Laundry preferences or requirements from the transcript"
+        },
+        "parking": {
+            "type": "string",
+            "description": "Parking requirements or preferences mentioned"
+        },
+        "amenities": {
+            "type": "string",
+            "description": "Desired amenities mentioned in the transcript"
+        },
+        "storage": {
+            "type": "string",
+            "description": "Storage requirements mentioned in the transcript"
+        },
+        "lease_term": {
+            "type": "string",
+            "description": "Lease term preferences mentioned in the transcript"
+        },
+        "move_in_date": {
+            "type": "string",
+            "description": "Move-in date mentioned in the transcript"
+        },
+        "elevator": {
+            "type": "string",
+            "description": "Elevator preferences mentioned in the transcript"
+        },
+        "additional_info": {
+            "type": "string",
+            "description": "Any other important information about the prospect that can be used for selling a unit."
+        }
+    }
+    
+    return [
+        {
+            "name": "transcript_parsing",
+            "description": "Extract structured client preferences from call transcripts",
+            "parameters": {
+                "type": "object",
+                "properties": properties
+            }
+        }
+    ]
+
 note_extraction_specs = generate_note_extraction_specs()
 rollup_summary_spec = generate_rollup_summary_spec()
+transcript_parsing_specs = generate_transcript_parsing_specs()
