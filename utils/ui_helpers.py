@@ -415,9 +415,6 @@ def display_prospect_info(prospect, transcript):
                         'amenities', 'storage', 'lease_term', 'move_in_date', 'elevator', 'additional_info']
     
     has_transcript_data = any(prospect.get(field) for field in transcript_fields)
-
-    st.write(prospect)
-    st.write(has_transcript_data)
     
     if has_transcript_data:
         st.markdown("---")
