@@ -32,10 +32,7 @@ def get_transcript_data(client_id):
     query = f"""
         SELECT client_id, transcript 
         FROM qaqc_graded_calls
-        WHERE client_id = '{client_id}' AND (
-            client_status_description_description = 'Prospect' OR 
-            client_status_description_description = 'Toured'
-        )
+        WHERE client_id = '{client_id}'
     """
 
     df = pd.read_sql(query, con)
