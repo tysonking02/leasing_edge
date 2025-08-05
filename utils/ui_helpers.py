@@ -411,10 +411,13 @@ def display_prospect_info(prospect, transcript):
     st.info(notes_text)
     
     # Check if we have transcript-parsed data
-    transcript_fields = ['Bedrooms', 'Bathrooms', 'Pet', 'Floor', 'Laundry', 'Parking', 
-                        'Amenities', 'Storage', 'LeaseTerm', 'MoveInDate', 'Elevator']
+    transcript_fields = ['bedrooms', 'bathrooms', 'pet', 'floor', 'laundry', 'parking', 
+                        'amenities', 'storage', 'lease_term', 'move_in_date', 'elevator', 'additional_info']
     
     has_transcript_data = any(prospect.get(field) for field in transcript_fields)
+
+    st.write(prospect)
+    st.write(has_transcript_data)
     
     if has_transcript_data:
         st.markdown("---")
@@ -423,50 +426,54 @@ def display_prospect_info(prospect, transcript):
         col3, col4 = st.columns(2)
         
         with col3:
-            if prospect.get('Bedrooms'):
+            if prospect.get('bedrooms'):
                 st.markdown("**Bedrooms**")
-                st.write(prospect.get('Bedrooms'))
+                st.write(prospect.get('bedrooms'))
             
-            if prospect.get('Bathrooms'):
-                st.markdown("**Bathrooms**")
-                st.write(prospect.get('Bathrooms'))
+            if prospect.get('bathrooms'):
+                st.markdown("**bathrooms**")
+                st.write(prospect.get('bathrooms'))
             
-            if prospect.get('Pet'):
+            if prospect.get('pet'):
                 st.markdown("**Pet Requirements**")
-                st.write(prospect.get('Pet'))
+                st.write(prospect.get('pet'))
             
-            if prospect.get('Floor'):
+            if prospect.get('floor'):
                 st.markdown("**Floor Preference**")
-                st.write(prospect.get('Floor'))
+                st.write(prospect.get('floor'))
             
-            if prospect.get('Laundry'):
+            if prospect.get('laundry'):
                 st.markdown("**Laundry**")
-                st.write(prospect.get('Laundry'))
+                st.write(prospect.get('laundry'))
             
-            if prospect.get('Parking'):
+            if prospect.get('parking'):
                 st.markdown("**Parking**")
-                st.write(prospect.get('Parking'))
+                st.write(prospect.get('parking'))
         
         with col4:
-            if prospect.get('Amenities'):
+            if prospect.get('amenities'):
                 st.markdown("**Desired Amenities**")
-                st.write(prospect.get('Amenities'))
+                st.write(prospect.get('amenities'))
             
-            if prospect.get('Storage'):
+            if prospect.get('storage'):
                 st.markdown("**Storage Requirements**")
-                st.write(prospect.get('Storage'))
+                st.write(prospect.get('storage'))
             
-            if prospect.get('LeaseTerm'):
+            if prospect.get('lease_term'):
                 st.markdown("**Lease Term**")
-                st.write(prospect.get('LeaseTerm'))
+                st.write(prospect.get('lease_term'))
             
-            if prospect.get('MoveInDate'):
+            if prospect.get('move_in_date'):
                 st.markdown("**Move-in Date**")
-                st.write(prospect.get('MoveInDate'))
+                st.write(prospect.get('move_in_date'))
             
-            if prospect.get('Elevator'):
+            if prospect.get('elevator'):
                 st.markdown("**Elevator Preference**")
-                st.write(prospect.get('Elevator'))
+                st.write(prospect.get('elevator'))
+                            
+            if prospect.get('additional_info'):
+                st.markdown("**Additional Information**")
+                st.write(prospect.get('additional_info'))
 
     if transcript != '':
         st.markdown("---")

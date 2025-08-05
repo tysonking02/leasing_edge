@@ -3,3 +3,4 @@ streamlit
 pandas
 pyyaml
 dotenv
+databricks-sql-connector
